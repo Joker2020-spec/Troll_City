@@ -5,6 +5,7 @@ contract TrollFactory {
     uint private total_trolls;
     
     uint public troll_types;
+    uint public max_troll_level = 50;
     address public contract_owner;
     bool public contract_active;
     
