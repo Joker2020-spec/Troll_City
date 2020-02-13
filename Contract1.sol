@@ -34,7 +34,7 @@ contract TrollFactory {
     }
     
     function Newtroll(string memory _name) public {
-        Troll memory newTroll = Troll(_name, 0, 1, 0, 0 ,0, 0, 0, 0, 0, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 0, 1, 0, 0, 0, 0, 0, 0, 0, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
     }
     
