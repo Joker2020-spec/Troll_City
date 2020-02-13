@@ -21,7 +21,6 @@ contract TrollFactory {
         uint agility;
         uint cleverness;
         uint troll_number;
-        uint troll_level;
         address owner;
         bool playable;
     }
@@ -39,7 +38,7 @@ contract TrollFactory {
     
     function Newtroll(string memory _name) public {
         total_trolls = trolls.length;
-        Troll memory newTroll = Troll(_name, 0, 1, 0, 0, 0, 0, 0, 0, 0, total_trolls, 0, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 0, 1, 0, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
