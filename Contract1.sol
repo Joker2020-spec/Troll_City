@@ -2,7 +2,8 @@ pragma solidity ^0.5.1;
 
 contract TrollFactory {
     
-    uint public total_trolls;
+    uint private total_trolls;
+    
     uint public troll_types;
     address public contract_owner;
     bool public contract_active;
@@ -35,13 +36,16 @@ contract TrollFactory {
     }
     
     function Newtroll(string memory _name) public {
+        total_trolls = trolls.length;
         Troll memory newTroll = Troll(_name, 0, 1, 0, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
-    function plus1() private {
-        total_trolls = total_trolls + 1;
+    
+    function getTotalTrolls() public view returns(uint) {
+        return trolls.length;
     }
+    
     
 }
