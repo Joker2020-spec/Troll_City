@@ -24,6 +24,7 @@ This page is incomplete. We’re working to improve it for the next release. Sta
 
 
 Core
+
 {{IERC721}}
 
 {{ERC721}}
@@ -43,6 +44,7 @@ Core
 {{IERC721Receiver}}
 
 Extensions
+
 {{ERC721Mintable}}
 
 {{ERC721MetadataMintable}}
@@ -52,4 +54,5 @@ Extensions
 {{ERC721Pausable}}
 
 Convenience
+
 {{ERC721Holder}}
