@@ -11,8 +11,8 @@ contract TrollFactory {
     
     struct Troll {
         string name;
-        bytes4 type_of;
-        uint id;
+        uint type_of;
+        uint troll_level;
         uint health;
         uint lifes;
         uint strength;
@@ -31,14 +31,42 @@ contract TrollFactory {
     
     constructor () public {
         total_trolls = 0;
-        troll_types = 10;
+        troll_types = 5;
         contract_owner = msg.sender;
         contract_active = true;
     }
     
-    function Newtroll(string memory _name) public {
+    function Newtroll_T1(string memory _name) public {
         total_trolls = trolls.length;
-        Troll memory newTroll = Troll(_name, 0, 1, 0, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 0, 1, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        troll_owner[msg.sender][total_trolls] = newTroll;
+        trolls.push(newTroll);
+    }
+    
+    function Newtroll_T2(string memory _name) public {
+        total_trolls = trolls.length;
+        Troll memory newTroll = Troll(_name, 0, 2, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        troll_owner[msg.sender][total_trolls] = newTroll;
+        trolls.push(newTroll);
+    }
+    
+    function Newtroll_T3(string memory _name) public {
+        total_trolls = trolls.length;
+        Troll memory newTroll = Troll(_name, 0, 3, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        troll_owner[msg.sender][total_trolls] = newTroll;
+        trolls.push(newTroll);
+    }
+    
+    function Newtroll_T4(string memory _name) public {
+        total_trolls = trolls.length;
+        Troll memory newTroll = Troll(_name, 0, 4, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        troll_owner[msg.sender][total_trolls] = newTroll;
+        trolls.push(newTroll);
+    }
+    
+    function Newtroll_T5(string memory _name) public {
+        total_trolls = trolls.length;
+        Troll memory newTroll = Troll(_name, 0, 5, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
