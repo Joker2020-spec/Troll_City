@@ -31,12 +31,4 @@ contract PlayerFactory is TrollFactory {
         players.push(newPlayer);
     }
     
-    function NewTroll(uint _trollId) public returns (bool success) {
-        uint captured = trolls.length; 
-        for (uint i = 0; i < trolls.length; i++) {
-            if (trolls.length[i] == troll_owner[msg.sender][_trollId].troll_number) {
-                
-            }
-        }
-    }
-}
+}   
