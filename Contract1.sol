@@ -2,7 +2,7 @@ pragma solidity ^0.5.1;
 
 contract TrollFactory {
     
-    uint private total_trolls;
+    uint internal total_trolls;
     
     uint public troll_types;
     uint public max_troll_level = 50;
@@ -77,4 +77,8 @@ contract TrollFactory {
     }
     
     
-}
+    function LevelUp(uint _trollNumber, address _key) public {
+        troll_owner[_key][_trollNumber].troll_level++ ;
+    }
+    
+}    
