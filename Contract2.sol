@@ -5,6 +5,8 @@ import"./Contract1.sol";
 contract PlayerFactory is TrollFactory {
     
     uint256 private Troll_Id = 0;
+    uint256 private Min_Payment = 0.1 ether;
+    uint256 private Max_Payment = 1 ether;
     
     struct PlayerCache {
         string name;
@@ -13,7 +15,7 @@ contract PlayerFactory is TrollFactory {
         uint256 type3;
         uint256 type4;
         uint256 type5;
-        mapping (uint256 => address) player_trolls;
+        mapping (address => uint256) player_trolls;
     }
     
     PlayerCache[] public players;
@@ -29,6 +31,12 @@ contract PlayerFactory is TrollFactory {
             playerProfile[msg.sender].type5 + Troll_Id
         );
         players.push(newPlayer);
+    }
+    
+    function NewTroll(string memory _name) public payable returns (bool success) {
+        Newtroll_T1(_name);
+        playerProfile[msg.sender].type1 + 1;
+        
     }
     
 }   
