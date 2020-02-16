@@ -1,6 +1,10 @@
 pragma solidity ^0.5.1;
 
+import"./SafeMath.sol";
+
 contract TrollFactory {
+    
+    using SafeMath for uint256;
     
     uint internal total_trolls;
     
@@ -77,8 +81,28 @@ contract TrollFactory {
     }
     
     
-    function LevelUp(uint256 _trollNumber, address _key) public {
-        troll_owner[_key][_trollNumber].troll_level++ ;
+    function LevelUp(address _key, uint256 _trollNumber, uint _amount) public {
+        for (uint256 i = 0; i < trolls.length; i++) {
+            if (trolls[i].troll_number == _trollNumber) {
+                trolls[i].troll_level = troll_owner[_key][_trollNumber].troll_level.add(_amount);
+            }
+        }
+    }
+    
+    function IncreaseHealth(address _key, uint256 _trollNumber) public {
+        troll_owner[_key][_trollNumber].health++;
+    }
+    
+    function IncreaseLifes(address _key, uint256 _trollNumber) public {
+        troll_owner[_key][_trollNumber].lifes++;
+    }
+    
+    function IncreaseStrength(address _key, uint256 _trollNumber) public {
+        troll_owner[_key][_trollNumber].strength++;
+    }
+    
+    function IncreasePower(address _key, uint256 _trollNumber) public {
+        troll_owner[_key][_trollNumber].power++;
     }
     
 }    
