@@ -4,16 +4,16 @@ import"./Contract1.sol";
 
 contract PlayerFactory is TrollFactory {
     
-    uint private Troll_Id = 0;
+    uint256 private Troll_Id = 0;
     
     struct PlayerCache {
         string name;
-        uint type1;
-        uint type2;
-        uint type3;
-        uint type4;
-        uint type5;
-        mapping (uint => address) player_trolls;
+        uint256 type1;
+        uint256 type2;
+        uint256 type3;
+        uint256 type4;
+        uint256 type5;
+        mapping (uint256 => address) player_trolls;
     }
     
     PlayerCache[] public players;
