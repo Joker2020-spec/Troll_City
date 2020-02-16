@@ -41,10 +41,10 @@ contract PlayerFactory is TrollFactory {
         if (msg.value == payment1) {
             Newtroll_T1(_name);
             UpdateTypeOne();
+            return true;
         } else {
             revert("Payment is not valid");
         }
-        return true;
         
     }
     
