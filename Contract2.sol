@@ -34,6 +34,7 @@ contract PlayerFactory is TrollFactory {
     }
     
     function NewTroll(string memory _name) public payable returns (bool success) {
+        CheckPayment;
         if (msg.value == payment1) {
             Newtroll_T1(_name);
             playerProfile[msg.sender].type1.add(1);
@@ -52,6 +53,15 @@ contract PlayerFactory is TrollFactory {
         }
         return success;
         
+    }
+    
+    function CheckPayment() private returns (bool ok) {
+        require (msg.value >= payment1 &&
+                 msg.value >= payment2 &&
+                 msg.value >= payment3 &&
+                 msg.value >= payment4 && 
+                 msg.value >= payment5);
+        return ok;          
     }
     
 }   
