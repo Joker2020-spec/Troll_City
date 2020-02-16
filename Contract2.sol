@@ -7,11 +7,11 @@ contract PlayerFactory is TrollFactory {
     
     using SafeMath for uint256;
     
-    uint256 private Min_Payment = 0.1 ether;
-    uint256 payment2 = 0.25 ether;
-    uint256 payment3 = 0.5 ether;
-    uint256 payment4 = 0.75 ether;
-    uint256 private Max_Payment = 1 ether;
+    uint256 private payment1 = 0.1 ether;
+    uint256 private payment2 = 0.25 ether;
+    uint256 private payment3 = 0.5 ether;
+    uint256 private payment4 = 0.75 ether;
+    uint256 private payment5 = 1 ether;
     
     struct PlayerCache {
         string name;
@@ -34,7 +34,7 @@ contract PlayerFactory is TrollFactory {
     }
     
     function NewTroll(string memory _name) public payable returns (bool success) {
-        if (msg.value == Min_Payment) {
+        if (msg.value == payment1) {
             Newtroll_T1(_name);
             playerProfile[msg.sender].type1.add(1);
         } else if (msg.value == payment2) {
@@ -46,7 +46,7 @@ contract PlayerFactory is TrollFactory {
         } else if (msg.value == payment4) {
             Newtroll_T4(_name);
             playerProfile[msg.sender].type4.add(1);
-        } else if (msg.value == Max_Payment) {
+        } else if (msg.value == payment5) {
             Newtroll_T5(_name);
             playerProfile[msg.sender].type5.add(1);
         }
