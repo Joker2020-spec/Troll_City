@@ -38,22 +38,21 @@ contract PlayerFactory is TrollFactory {
         CheckPayment;
         if (msg.value == payment1) {
             Newtroll_T1(_name);
-            playerProfile[msg.sender].type1.add(1);
-        } else if (msg.value == payment2) {
-            Newtroll_T2(_name);
-            playerProfile[msg.sender].type2.add(1);
-        } else if (msg.value == payment3) {
-            Newtroll_T3(_name);
-            playerProfile[msg.sender].type3.add(1);
-        } else if (msg.value == payment4) {
-            Newtroll_T4(_name);
-            playerProfile[msg.sender].type4.add(1);
-        } else if (msg.value == payment5) {
-            Newtroll_T5(_name);
-            playerProfile[msg.sender].type5.add(1);
+            UpdateTypeOne();
+        } else {
+            revert();
         }
         return success;
         
+    }
+    
+    function UpdateTypeOne() private {
+        for (uint i = 0; i < players.length; i++) {
+                if (players[i].key == msg.sender) {
+                    playerProfile[msg.sender].type1 = playerProfile[msg.sender].type1.add(1);
+                    players[i].type1 = players[i].type1.add(1);
+                }
+            }
     }
     
     function CheckPayment() private {
