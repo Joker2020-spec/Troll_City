@@ -4,28 +4,28 @@ contract TrollFactory {
     
     uint internal total_trolls;
     
-    uint public troll_types;
-    uint public max_troll_level = 50;
+    uint256 public troll_types;
+    uint256 public max_troll_level = 50;
     address public contract_owner;
     bool public contract_active;
     
     struct Troll {
         string name;
-        uint type_of;
-        uint troll_level;
-        uint health;
-        uint lifes;
-        uint strength;
-        uint power;
-        uint speed;
-        uint agility;
-        uint cleverness;
-        uint troll_number;
+        uint256 type_of;
+        uint256 troll_level;
+        uint256 health;
+        uint256 lifes;
+        uint256 strength;
+        uint256 power;
+        uint256 speed;
+        uint256 agility;
+        uint256 cleverness;
+        uint256 troll_number;
         address owner;
         bool playable;
     }
     
-    mapping (address => mapping(uint => Troll)) public troll_owner;
+    mapping (address => mapping(uint256 => Troll)) public troll_owner;
     
     Troll[] public trolls;
     
@@ -72,12 +72,12 @@ contract TrollFactory {
     }
     
     
-    function getTotalTrolls() public view returns(uint) {
+    function getTotalTrolls() public view returns(uint256) {
         return trolls.length;
     }
     
     
-    function LevelUp(uint _trollNumber, address _key) public {
+    function LevelUp(uint256 _trollNumber, address _key) public {
         troll_owner[_key][_trollNumber].troll_level++ ;
     }
     
