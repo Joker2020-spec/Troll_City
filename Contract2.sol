@@ -34,15 +34,15 @@ contract PlayerFactory is TrollFactory {
         players.push(newPlayer);
     }
     
-    function NewTroll(string memory _name) public payable returns (bool success) {
+    function NewTrollType1(string memory _name) public payable returns (bool success) {
         CheckPayment;
         if (msg.value == payment1) {
             Newtroll_T1(_name);
             UpdateTypeOne();
         } else {
-            revert();
+            revert("Payment is not valid");
         }
-        return success;
+        return true;
         
     }
     
