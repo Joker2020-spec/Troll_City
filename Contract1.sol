@@ -82,6 +82,7 @@ contract TrollFactory {
     
     
     function LevelUp(address _key, uint256 _trollNumber, uint _amount) public {
+        uint _amount = troll_owner[_key][_trollNumber].troll_level;
         for (uint256 i = 0; i < trolls.length; i++) {
             if (trolls[i].troll_number == _trollNumber) {
                 trolls[i].troll_level = troll_owner[_key][_trollNumber].troll_level.add(_amount);
