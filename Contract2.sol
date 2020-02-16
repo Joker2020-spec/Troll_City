@@ -56,6 +56,12 @@ contract PlayerFactory is TrollFactory {
             }
     }
     
+    function GetPlayerTrolls(address _player) public view returns (uint[] memory) {
+        for (uint i = 0; i < players.length; i++) {
+            return players[i].player_trolls[_player];
+        }
+    }  
+    
     function CheckPayment() private {
         require (msg.value >= payment1);    
         require (msg.value >= payment2);
