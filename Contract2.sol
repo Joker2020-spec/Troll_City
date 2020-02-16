@@ -21,7 +21,7 @@ contract PlayerFactory is TrollFactory {
         uint256 type3;
         uint256 type4;
         uint256 type5;
-        mapping (address => uint256) player_trolls;
+        uint256[] player_trolls;
     }
     
     PlayerCache[] public players;
@@ -29,7 +29,8 @@ contract PlayerFactory is TrollFactory {
     mapping (address => PlayerCache) public playerProfile;
     
     function NewPlayer(string memory _name) public {
-        PlayerCache memory newPlayer = PlayerCache({name: _name, key: msg.sender, type1: 0, type2: 0, type3: 0, type4: 0, type5: 0});
+        uint256[] memory list;
+        PlayerCache memory newPlayer = PlayerCache({name: _name, key: msg.sender, type1: 0, type2: 0, type3: 0, type4: 0, type5: 0, player_trolls: list});
         playerProfile[msg.sender] = newPlayer;
         players.push(newPlayer);
     }
@@ -51,14 +52,14 @@ contract PlayerFactory is TrollFactory {
                 if (players[i].key == msg.sender) {
                     uint nt = playerProfile[msg.sender].type1 = playerProfile[msg.sender].type1.add(1);
                     players[i].type1 = players[i].type1.add(1);
-                    players[i].player_trolls[msg.sender] = nt;
+                    players[i].player_trolls.push(nt);
                 }
             }
     }
     
-    function GetPlayerTrolls(address _player) public view returns (uint[] memory) {
+    function GetPlayerTrolls(uint _player) public view returns (uint[] memory) {
         for (uint i = 0; i < players.length; i++) {
-            return players[i].player_trolls[_player];
+            return players[_player].player_trolls;
         }
     }  
     
