@@ -22,6 +22,7 @@ contract PlayerFactory is TrollFactory {
         uint256 type4;
         uint256 type5;
         uint256[] player_trolls;
+        bool active;
     }
     
     PlayerCache[] public players;
@@ -30,7 +31,7 @@ contract PlayerFactory is TrollFactory {
     
     function NewPlayer(string memory _name) public {
         uint256[] memory list;
-        PlayerCache memory newPlayer = PlayerCache({name: _name, key: msg.sender, type1: 0, type2: 0, type3: 0, type4: 0, type5: 0, player_trolls: list});
+        PlayerCache memory newPlayer = PlayerCache({name: _name, key: msg.sender, type1: 0, type2: 0, type3: 0, type4: 0, type5: 0, player_trolls: list, active: true});
         playerProfile[msg.sender] = newPlayer;
         players.push(newPlayer);
     }
@@ -47,6 +48,60 @@ contract PlayerFactory is TrollFactory {
         
     }
     
+    function NewTrollType2(string memory _name) public payable returns (bool success) {
+        CheckPayment;
+        if (msg.value == payment2) {
+            Newtroll_T2(_name);
+            UpdateTypeTwo();
+        } else {
+            revert("Payment is not valid");
+        }
+        return true;
+        
+    }
+    
+    function NewTrollType3(string memory _name) public payable returns (bool success) {
+        CheckPayment;
+        if (msg.value == payment3) {
+            Newtroll_T3(_name);
+            UpdateTypeThree();
+        } else {
+            revert("Payment is not valid");
+        }
+        return true;
+        
+    }
+    
+    function NewTrollType4(string memory _name) public payable returns (bool success) {
+        CheckPayment;
+        if (msg.value == payment4) {
+            Newtroll_T4(_name);
+            UpdateTypeFour();
+        } else {
+            revert("Payment is not valid");
+        }
+        return true;
+        
+    }
+    
+    function NewTrollType5(string memory _name) public payable returns (bool success) {
+        CheckPayment;
+        if (msg.value == payment5) {
+            Newtroll_T5(_name);
+            UpdateTypeFive();
+        } else {
+            revert("Payment is not valid");
+        }
+        return true;
+        
+    }
+    
+    function GetPlayerTrolls(uint _player) public view returns (uint[] memory) {
+        for (uint i = 0; i < players.length; i++) {
+            return players[_player].player_trolls;
+        }
+    }  
+    
     function UpdateTypeOne() private {
         for (uint i = 0; i < players.length; i++) {
                 if (players[i].key == msg.sender) {
@@ -57,11 +112,45 @@ contract PlayerFactory is TrollFactory {
             }
     }
     
-    function GetPlayerTrolls(uint _player) public view returns (uint[] memory) {
+    function UpdateTypeTwo() private {
         for (uint i = 0; i < players.length; i++) {
-            return players[_player].player_trolls;
-        }
-    }  
+                if (players[i].key == msg.sender) {
+                    playerProfile[msg.sender].type2 = playerProfile[msg.sender].type2.add(1);
+                    players[i].type2 = players[i].type2.add(1);
+                    players[i].player_trolls.push(trolls.length);
+                }
+            }
+    }
+    
+    function UpdateTypeThree() private {
+        for (uint i = 0; i < players.length; i++) {
+                if (players[i].key == msg.sender) {
+                    playerProfile[msg.sender].type3 = playerProfile[msg.sender].type3.add(1);
+                    players[i].type3 = players[i].type3.add(1);
+                    players[i].player_trolls.push(trolls.length);
+                }
+            }
+    }
+    
+    function UpdateTypeFour() private {
+        for (uint i = 0; i < players.length; i++) {
+                if (players[i].key == msg.sender) {
+                    playerProfile[msg.sender].type4 = playerProfile[msg.sender].type4.add(1);
+                    players[i].type4 = players[i].type4.add(1);
+                    players[i].player_trolls.push(trolls.length);
+                }
+            }
+    }
+    
+    function UpdateTypeFive() private {
+        for (uint i = 0; i < players.length; i++) {
+                if (players[i].key == msg.sender) {
+                    playerProfile[msg.sender].type5 = playerProfile[msg.sender].type5.add(1);
+                    players[i].type5 = players[i].type5.add(1);
+                    players[i].player_trolls.push(trolls.length);
+                }
+            }
+    }
     
     function CheckPayment() private {
         require (msg.value >= payment1);    
