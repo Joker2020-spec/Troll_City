@@ -50,9 +50,9 @@ contract PlayerFactory is TrollFactory {
     function UpdateTypeOne() private {
         for (uint i = 0; i < players.length; i++) {
                 if (players[i].key == msg.sender) {
-                    uint nt = playerProfile[msg.sender].type1 = playerProfile[msg.sender].type1.add(1);
+                    playerProfile[msg.sender].type1 = playerProfile[msg.sender].type1.add(1);
                     players[i].type1 = players[i].type1.add(1);
-                    players[i].player_trolls.push(nt);
+                    players[i].player_trolls.push(trolls.length);
                 }
             }
     }
