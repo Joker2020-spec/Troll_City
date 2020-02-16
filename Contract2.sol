@@ -97,13 +97,13 @@ contract PlayerFactory is TrollFactory {
     }
     
     function GetPlayerTrolls(uint _player) public view returns (uint[] memory) {
-        for (uint i = 0; i < players.length; i++) {
+        for (uint256 i = 0; i < players.length; i++) {
             return players[_player].player_trolls;
         }
     }  
     
     function UpdateTypeOne() private {
-        for (uint i = 0; i < players.length; i++) {
+        for (uint256 i = 0; i < players.length; i++) {
                 if (players[i].key == msg.sender) {
                     playerProfile[msg.sender].type1 = playerProfile[msg.sender].type1.add(1);
                     players[i].type1 = players[i].type1.add(1);
@@ -113,7 +113,7 @@ contract PlayerFactory is TrollFactory {
     }
     
     function UpdateTypeTwo() private {
-        for (uint i = 0; i < players.length; i++) {
+        for (uint256 i = 0; i < players.length; i++) {
                 if (players[i].key == msg.sender) {
                     playerProfile[msg.sender].type2 = playerProfile[msg.sender].type2.add(1);
                     players[i].type2 = players[i].type2.add(1);
@@ -123,7 +123,7 @@ contract PlayerFactory is TrollFactory {
     }
     
     function UpdateTypeThree() private {
-        for (uint i = 0; i < players.length; i++) {
+        for (uint256 i = 0; i < players.length; i++) {
                 if (players[i].key == msg.sender) {
                     playerProfile[msg.sender].type3 = playerProfile[msg.sender].type3.add(1);
                     players[i].type3 = players[i].type3.add(1);
@@ -133,7 +133,7 @@ contract PlayerFactory is TrollFactory {
     }
     
     function UpdateTypeFour() private {
-        for (uint i = 0; i < players.length; i++) {
+        for (uint256 i = 0; i < players.length; i++) {
                 if (players[i].key == msg.sender) {
                     playerProfile[msg.sender].type4 = playerProfile[msg.sender].type4.add(1);
                     players[i].type4 = players[i].type4.add(1);
@@ -143,7 +143,7 @@ contract PlayerFactory is TrollFactory {
     }
     
     function UpdateTypeFive() private {
-        for (uint i = 0; i < players.length; i++) {
+        for (uint256 i = 0; i < players.length; i++) {
                 if (players[i].key == msg.sender) {
                     playerProfile[msg.sender].type5 = playerProfile[msg.sender].type5.add(1);
                     players[i].type5 = players[i].type5.add(1);
