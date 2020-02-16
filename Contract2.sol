@@ -29,7 +29,8 @@ contract PlayerFactory is TrollFactory {
     mapping (address => PlayerCache) public playerProfile;
     
     function NewPlayer(string memory _name) public {
-        PlayerCache memory newPlayer = PlayerCache(_name, msg.sender, 0, 0, 0, 0, 0);
+        PlayerCache memory newPlayer = PlayerCache({name: _name, key: msg.sender, type1: 0, type2: 0, type3: 0, type4: 0, type5: 0});
+        playerProfile[msg.sender] = newPlayer;
         players.push(newPlayer);
     }
     
@@ -55,13 +56,12 @@ contract PlayerFactory is TrollFactory {
         
     }
     
-    function CheckPayment() private returns (bool ok) {
-        require (msg.value >= payment1 &&
-                 msg.value >= payment2 &&
-                 msg.value >= payment3 &&
-                 msg.value >= payment4 && 
-                 msg.value >= payment5);
-        return ok;          
+    function CheckPayment() private {
+        require (msg.value >= payment1);    
+        require (msg.value >= payment2);
+        require (msg.value >= payment3);
+        require (msg.value >= payment4);
+        require (msg.value >= payment5);
     }
     
 }   
