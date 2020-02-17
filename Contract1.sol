@@ -91,43 +91,43 @@ contract TrollFactory {
         }
     }
     
-    function IncreaseHealth(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint) {
+    function IncreaseHealth(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
         trolls[_trollNumber].health = trolls[_trollNumber].health.add(_amount);
         troll_owner[_key][_trollNumber].health = troll_owner[_key][_trollNumber].health.add(_amount);
         return trolls[_trollNumber].health;
     }
     
-    function IncreaseLifes(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint) {
+    function IncreaseLifes(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
         trolls[_trollNumber].lifes = trolls[_trollNumber].lifes.add(_amount);
         troll_owner[_key][_trollNumber].lifes = troll_owner[_key][_trollNumber].lifes.add(_amount);
         return trolls[_trollNumber].lifes;
     }
     
-    function IncreaseStrength(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint) {
+    function IncreaseStrength(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
         trolls[_trollNumber].strength = trolls[_trollNumber].strength.add(_amount);
         troll_owner[_key][_trollNumber].strength = troll_owner[_key][_trollNumber].strength.add(_amount);
         return trolls[_trollNumber].strength;
     }
     
-    function IncreasePower(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint) {
+    function IncreasePower(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
         trolls[_trollNumber].power = trolls[_trollNumber].power.add(_amount);
         troll_owner[_key][_trollNumber].power = troll_owner[_key][_trollNumber].power.add(_amount);
         return trolls[_trollNumber].power;
     }
     
-    function IncreaseSpeed(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint) {
+    function IncreaseSpeed(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
         trolls[_trollNumber].speed = trolls[_trollNumber].speed.add(_amount);
         troll_owner[_key][_trollNumber].speed = troll_owner[_key][_trollNumber].speed.add(_amount);
         return trolls[_trollNumber].speed;
     }
     
-    function IncreaseAgility(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint) {
+    function IncreaseAgility(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
         trolls[_trollNumber].agility = trolls[_trollNumber].agility.add(_amount);
         troll_owner[_key][_trollNumber].agility = troll_owner[_key][_trollNumber].agility.add(_amount);
         return trolls[_trollNumber].agility;
     }
     
-    function IncreaseCleverness(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint) {
+    function IncreaseCleverness(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
         trolls[_trollNumber].cleverness = trolls[_trollNumber].cleverness.add(_amount);
         troll_owner[_key][_trollNumber].cleverness = troll_owner[_key][_trollNumber].cleverness.add(_amount);
         return trolls[_trollNumber].cleverness;
