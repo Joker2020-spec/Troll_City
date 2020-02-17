@@ -86,43 +86,54 @@ contract TrollFactory {
         for (uint256 i = 0; i < trolls.length; i++) {
             if (trolls[i].troll_number == _trollNumber) {
                 trolls[i].troll_level = trolls[i].troll_level.add(_amount);
+                troll_owner[_key][_trollNumber].troll_level = troll_owner[_key][_trollNumber].troll_level.add(_amount);
             }
         }
     }
     
-    function IncreaseHealth(uint256 _trollNumber, uint8 _amount) public {
+    function IncreaseHealth(address _key, uint256 _trollNumber, uint8 _amount) public {
         trolls[_trollNumber].health = trolls[_trollNumber].health.add(_amount);
+        troll_owner[_key][_trollNumber].health = troll_owner[_key][_trollNumber].health.add(_amount);
     }
     
-    function IncreaseLifes(uint256 _trollNumber, uint8 _amount) public {
+    function IncreaseLifes(address _key, uint256 _trollNumber, uint8 _amount) public {
         trolls[_trollNumber].lifes = trolls[_trollNumber].lifes.add(_amount);
+        troll_owner[_key][_trollNumber].lifes = troll_owner[_key][_trollNumber].lifes.add(_amount);
     }
     
-    function IncreaseStrength(uint256 _trollNumber, uint8 _amount) public {
+    function IncreaseStrength(address _key, uint256 _trollNumber, uint8 _amount) public {
         trolls[_trollNumber].strength = trolls[_trollNumber].strength.add(_amount);
+        troll_owner[_key][_trollNumber].strength = troll_owner[_key][_trollNumber].strength.add(_amount);
     }
     
-    function IncreasePower(uint256 _trollNumber, uint8 _amount) public {
+    function IncreasePower(address _key, uint256 _trollNumber, uint8 _amount) public {
         trolls[_trollNumber].power = trolls[_trollNumber].power.add(_amount);
+        troll_owner[_key][_trollNumber].power = troll_owner[_key][_trollNumber].power.add(_amount);
     }
     
-    function IncreaseSpeed(uint256 _trollNumber, uint8 _amount) public {
+    function IncreaseSpeed(address _key, uint256 _trollNumber, uint8 _amount) public {
         trolls[_trollNumber].speed = trolls[_trollNumber].speed.add(_amount);
+        troll_owner[_key][_trollNumber].speed = troll_owner[_key][_trollNumber].speed.add(_amount);
     }
     
-    function IncreaseAgility(uint256 _trollNumber, uint8 _amount) public {
+    function IncreaseAgility(address _key, uint256 _trollNumber, uint8 _amount) public {
         trolls[_trollNumber].agility = trolls[_trollNumber].agility.add(_amount);
+        troll_owner[_key][_trollNumber].agility = troll_owner[_key][_trollNumber].agility.add(_amount);
     }
     
-    function IncreaseCleverness(uint256 _trollNumber, uint8 _amount) public {
+    function IncreaseCleverness(address _key, uint256 _trollNumber, uint8 _amount) public {
         trolls[_trollNumber].cleverness = trolls[_trollNumber].cleverness.add(_amount);
+        troll_owner[_key][_trollNumber].cleverness = troll_owner[_key][_trollNumber].cleverness.add(_amount);
     }
     
-    function UpdateTrollType(uint256 _trollNumber) public returns (bool success) {
+    function UpdateTrollType(address _key, uint256 _trollNumber) public returns (bool success) {
         require (trolls[_trollNumber].troll_level >= 100);
         if (trolls[_trollNumber].troll_level >= 100) {
             trolls[_trollNumber].type_of = trolls[_trollNumber].type_of.add(1);
+            troll_owner[_key][_trollNumber].type_of = troll_owner[_key][_trollNumber].type_of.add(1);
         }
         return true;
     }
+    
+    
 }    
