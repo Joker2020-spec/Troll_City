@@ -208,6 +208,7 @@ contract TrollFactory {
         trolls[_trollNumber].owner = _new;
         troll_owner[_old][_trollNumber].owner = _new;
         troll_owner[_new][_trollNumber].owner = _new;
+        return trolls[_trollNumber].owner;
     }
     
     function ChangeTrollName(uint256 _trollNumber, string memory _newName) public {
