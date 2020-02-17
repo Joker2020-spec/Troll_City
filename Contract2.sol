@@ -16,6 +16,7 @@ contract PlayerFactory is TrollFactory {
     struct PlayerCache {
         string name;
         address key;
+        uint256 id;
         uint256 type1;
         uint256 type2;
         uint256 type3;
@@ -31,7 +32,7 @@ contract PlayerFactory is TrollFactory {
     
     function NewPlayer(string memory _name) public {
         uint256[] memory list;
-        PlayerCache memory newPlayer = PlayerCache({name: _name, key: msg.sender, type1: 0, type2: 0, type3: 0, type4: 0, type5: 0, player_trolls: list, active: true});
+        PlayerCache memory newPlayer = PlayerCache({name: _name, key: msg.sender, id: players.length, type1: 0, type2: 0, type3: 0, type4: 0, type5: 0, player_trolls: list, active: true});
         playerProfile[msg.sender] = newPlayer;
         players.push(newPlayer);
     }
@@ -160,4 +161,18 @@ contract PlayerFactory is TrollFactory {
         require (msg.value >= payment5);
     }
     
-}   
+    function DeActivatePlayer(address _key, uint256 _playerNum) public returns (bool success) {
+        require(playerProfile[_key].active == true);
+        playerProfile[_key].active = false;
+        players[_playerNum].active = false;
+        return true;
+    }
+    
+    function ReActivatePlayer(address _key, uint256 _playerNum) public returns (bool success) {
+        require(playerProfile[_key].active == false);
+        playerProfile[_key].active = true;
+        players[_playerNum].active = true;
+        return true;
+    }
+    
+}
