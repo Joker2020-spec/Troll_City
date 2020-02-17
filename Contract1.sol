@@ -134,8 +134,8 @@ contract TrollFactory {
     }
     
     function UpdateTrollType(address _key, uint256 _trollNumber) public returns (bool success) {
-        require (trolls[_trollNumber].troll_level >= 100);
-        if (trolls[_trollNumber].troll_level >= 100) {
+        require (trolls[_trollNumber].troll_level >= max_troll_level);
+        if (trolls[_trollNumber].troll_level >= max_troll_level) {
             trolls[_trollNumber].type_of = trolls[_trollNumber].type_of.add(1);
             troll_owner[_key][_trollNumber].type_of = troll_owner[_key][_trollNumber].type_of.add(1);
         }
