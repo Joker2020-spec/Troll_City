@@ -82,11 +82,19 @@ contract TrollFactory {
     
     
     function LevelUp(address _key, uint256 _trollNumber) public {
-        uint _amount = troll_owner[_key][_trollNumber].troll_level;
         for (uint256 i = 0; i < trolls.length; i++) {
             if (trolls[i].troll_number == _trollNumber) {
-                trolls[i].troll_level = trolls[i].troll_level.add(_amount);
-                troll_owner[_key][_trollNumber].troll_level = troll_owner[_key][_trollNumber].troll_level.add(_amount);
+                trolls[i].troll_level = trolls[i].troll_level.add(1);
+                troll_owner[_key][_trollNumber].troll_level = troll_owner[_key][_trollNumber].troll_level.add(1);
+            }
+        }
+    }
+    
+    function LevelDown(address _key, uint256 _trollNumber) public {
+        for (uint256 i = 0; i < trolls.length; i++) {
+            if (trolls[i].troll_number == _trollNumber) {
+                trolls[i].troll_level = trolls[i].troll_level.sub(1);
+                troll_owner[_key][_trollNumber].troll_level = troll_owner[_key][_trollNumber].troll_level.sub(1);
             }
         }
     }
@@ -133,6 +141,49 @@ contract TrollFactory {
         return trolls[_trollNumber].cleverness;
     }
     
+    function DecreaseHealth(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+        trolls[_trollNumber].health = trolls[_trollNumber].health.sub(_amount);
+        troll_owner[_key][_trollNumber].health = troll_owner[_key][_trollNumber].health.sub(_amount);
+        return trolls[_trollNumber].health;
+    }
+    
+    function DecreaseLifes(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+        trolls[_trollNumber].lifes = trolls[_trollNumber].lifes.sub(_amount);
+        troll_owner[_key][_trollNumber].lifes = troll_owner[_key][_trollNumber].lifes.sub(_amount);
+        return trolls[_trollNumber].lifes;
+    }
+    
+    function DecreaseStrength(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+        trolls[_trollNumber].strength = trolls[_trollNumber].strength.sub(_amount);
+        troll_owner[_key][_trollNumber].strength = troll_owner[_key][_trollNumber].strength.sub(_amount);
+        return trolls[_trollNumber].strength;
+    }
+    
+    function DecreasePower(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+        trolls[_trollNumber].power = trolls[_trollNumber].power.sub(_amount);
+        troll_owner[_key][_trollNumber].power = troll_owner[_key][_trollNumber].power.sub(_amount);
+        return trolls[_trollNumber].power;
+    }
+    
+    function DecreaseSpeed(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+        trolls[_trollNumber].speed = trolls[_trollNumber].speed.sub(_amount);
+        troll_owner[_key][_trollNumber].speed = troll_owner[_key][_trollNumber].speed.sub(_amount);
+        return trolls[_trollNumber].speed;
+    }
+    
+    function DecreaseAgility(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+        trolls[_trollNumber].agility = trolls[_trollNumber].agility.sub(_amount);
+        troll_owner[_key][_trollNumber].agility = troll_owner[_key][_trollNumber].agility.sub(_amount);
+        return trolls[_trollNumber].agility;
+    }
+    
+    function DecreaseCleverness(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+        trolls[_trollNumber].cleverness = trolls[_trollNumber].cleverness.sub(_amount);
+        troll_owner[_key][_trollNumber].cleverness = troll_owner[_key][_trollNumber].cleverness.sub(_amount);
+        return trolls[_trollNumber].cleverness;
+    }
+
+    
     function UpdateTrollType(address _key, uint256 _trollNumber) public returns (bool success) {
         require (trolls[_trollNumber].troll_level >= max_troll_level);
         if (trolls[_trollNumber].troll_level >= max_troll_level) {
@@ -157,6 +208,11 @@ contract TrollFactory {
         trolls[_trollNumber].owner = _new;
         troll_owner[_old][_trollNumber].owner = _new;
         troll_owner[_new][_trollNumber].owner = _new;
+    }
+    
+    function ChangeTrollName(uint256 _trollNumber, string memory _newName) public {
+        trolls[_trollNumber].name = _newName;
+        troll_owner[msg.sender][_trollNumber].name = _newName;
     }
     
     
