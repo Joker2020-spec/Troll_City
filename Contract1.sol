@@ -85,7 +85,7 @@ contract TrollFactory {
         uint _amount = troll_owner[_key][_trollNumber].troll_level;
         for (uint256 i = 0; i < trolls.length; i++) {
             if (trolls[i].troll_number == _trollNumber) {
-                trolls[i].troll_level = troll_owner[_key][_trollNumber].troll_level.add(_amount);
+                trolls[i].troll_level = trolls[i].troll_level.add(_amount);
             }
         }
     }
@@ -119,8 +119,8 @@ contract TrollFactory {
     }
     
     function UpdateTrollType(uint256 _trollNumber) public returns (bool success) {
-        require (trolls[_trollNumber].troll_level >= 2);
-        if (trolls[_trollNumber].troll_level >= 2) {
+        require (trolls[_trollNumber].troll_level >= 100);
+        if (trolls[_trollNumber].troll_level >= 100) {
             trolls[_trollNumber].type_of = trolls[_trollNumber].type_of.add(1);
         }
         return true;
