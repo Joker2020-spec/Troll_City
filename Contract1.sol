@@ -142,5 +142,22 @@ contract TrollFactory {
         return true;
     }
     
+    function DeadTroll(address _key, uint256 _trollNumber) public {
+        trolls[_trollNumber].playable = false;
+        troll_owner[_key][_trollNumber].playable = false;
+    }
+    
+    function ReviveTroll(address _key, uint256 _trollNumber) public {
+        trolls[_trollNumber].playable = true;
+        troll_owner[_key][_trollNumber].playable = true;
+    }
+    
+    function NewTrollOwner(address _old, address _new, uint256 _trollNumber) public returns (address) {
+        require (trolls[_trollNumber].owner == _old);
+        trolls[_trollNumber].owner = _new;
+        troll_owner[_old][_trollNumber].owner = _new;
+        troll_owner[_new][_trollNumber].owner = _new;
+    }
+    
     
 }    
