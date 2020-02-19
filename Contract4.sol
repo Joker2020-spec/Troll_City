@@ -1,8 +1,11 @@
 pragma solidity ^0.5.1;
 
-import"./Contract2.sol";
+import"./Contract1.sol";
+import "./SafeMath.sol";
 
-contract PlayerInteraction is PlayerFactory {
+contract PlayerInteraction is TrollFactory {
+    
+    using SafeMath for uint256;
     
     uint256 games_open = 0;
     uint256 games_finished = 0;
@@ -37,7 +40,7 @@ contract PlayerInteraction is PlayerFactory {
     
     function closeSinglesGame(address p1, address p2, uint gameNum) public {
         for (uint i = 0; i < game_on.length; i++) {
-            if (game_on[i].player1 == p1 && game_on[i].player2 == p2) {
+            if (game_on[gameNum].player1 == p1 && game_on[gameNum].player2 == p2) {
                 game_on[i].finished = true;
                 emit SinglesGameShut(game_on[i].number, p1, p2);
             }
