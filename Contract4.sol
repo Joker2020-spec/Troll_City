@@ -26,20 +26,23 @@ contract PlayerInteraction is PlayerFactory {
     Game[] public game_on;
     
     
-    function OpenGame(SportsGames _SG, GameChoice _GC, uint _gameNum) public {
-        game_on[_gameNum].sg = _SG;
-        game_on[_gameNum].gc = _GC;
-        games_open++;
+    function OpenSinglesGame(SportsGames _SG, GameChoice _GC, address p1, address p2) public {
+        uint newGame = game_on.push(Game(p1, p2, 0, 0, _SG, _GC, true, false));
+        games_open = games_open.add(newGame);
+    }
+    
+    function closeSinglesGame(address p1, address p2) public {
+        for (uint i = 0; i < game_on.length; i++) {
+            if (game_on[i].player1 == p1 && game_on[i].player2 == p2) {
+                game_on[i].finished = true;
+            }
+        }
     }
     
     function GamePlayed() public returns (bool finished) {
         games_played++;
         return true;
     }
-    
-    function Choice(uint _SG, uint _GC) internal {
-        
-    }
-    
+
     
 }
