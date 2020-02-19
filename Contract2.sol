@@ -103,6 +103,24 @@ contract PlayerFactory is TrollFactory {
         }
     }  
     
+    function GetPlayer(uint256 _player) public view returns (string memory, address, uint256, uint256, uint256, uint256, uint256, uint256, uint256, bool) {
+        for (uint i = 0; i < players.length; i++) {
+            if (players[i].id == _player) {
+            return(players[i].name, 
+                   players[i].key, 
+                   players[i].id, 
+                   players[i].type1, 
+                   players[i].type2, 
+                   players[i].type3, 
+                   players[i].type4, 
+                   players[i].type5, 
+                   players[i].player_trolls.length, 
+                   players[i].active); 
+                
+            }
+        }
+    }
+    
     function UpdateTypeOne() private {
         for (uint256 i = 0; i < players.length; i++) {
                 if (players[i].key == msg.sender) {
