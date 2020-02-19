@@ -13,10 +13,11 @@ contract PlayerInteraction is PlayerFactory {
 
     
     struct Game {
-        address player1;
-        address player2;
+        uint number;
         uint score1;
         uint score2;
+        address player1;
+        address player2;
         SportsGames sg;
         GameChoice gc;
         bool begun;
@@ -25,18 +26,23 @@ contract PlayerInteraction is PlayerFactory {
     
     Game[] public game_on;
     
+    event NewSinglesGame(uint gameOpened, address player1, address player2);
+    event SinglesGameShut(uint gameFinished, address player1, address player2);
     
     function OpenSinglesGame(SportsGames _SG, GameChoice _GC, address p1, address p2) public {
-        uint newGame = game_on.push(Game(p1, p2, 0, 0, _SG, _GC, true, false));
+        uint newGame = game_on.push(Game(game_on.length, 0, 0, p1, p2, _SG, _GC, true, false));
         games_open = games_open.add(newGame);
+        emit NewSinglesGame(newGame, p1, p2);
     }
     
-    function closeSinglesGame(address p1, address p2) public {
+    function closeSinglesGame(address p1, address p2, uint gameNum) public {
         for (uint i = 0; i < game_on.length; i++) {
             if (game_on[i].player1 == p1 && game_on[i].player2 == p2) {
                 game_on[i].finished = true;
+                emit SinglesGameShut(game_on[i], p1, p2);
             }
         }
+        
     }
     
     function GamePlayed() public returns (bool finished) {
