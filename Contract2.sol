@@ -37,11 +37,17 @@ contract PlayerFactory is TrollFactory {
         players.push(newPlayer);
     }
     
+    function ChangePlayerName(string memory _newName, uint _playerNum) public returns (string memory name) {
+        require (msg.sender == playerProfile[msg.sender].key);
+        playerProfile[msg.sender].name = _newName;
+        players[_playerNum].name = _newName;
+        return players[_playerNum].name;
+    }
+    
     function NewTrollType1(string memory _name) public payable returns (bool success) {
         CheckPayment;
         if (msg.value == payment1) {
             Newtroll_T1(_name);
-            UpdateTypeOne();
             return true;
         } else {
             revert("Payment is not valid");
@@ -53,7 +59,6 @@ contract PlayerFactory is TrollFactory {
         CheckPayment;
         if (msg.value == payment2) {
             Newtroll_T2(_name);
-            UpdateTypeTwo();
         } else {
             revert("Payment is not valid");
         }
@@ -65,7 +70,6 @@ contract PlayerFactory is TrollFactory {
         CheckPayment;
         if (msg.value == payment3) {
             Newtroll_T3(_name);
-            UpdateTypeThree();
         } else {
             revert("Payment is not valid");
         }
@@ -77,7 +81,6 @@ contract PlayerFactory is TrollFactory {
         CheckPayment;
         if (msg.value == payment4) {
             Newtroll_T4(_name);
-            UpdateTypeFour();
         } else {
             revert("Payment is not valid");
         }
@@ -89,7 +92,6 @@ contract PlayerFactory is TrollFactory {
         CheckPayment;
         if (msg.value == payment5) {
             Newtroll_T5(_name);
-            UpdateTypeFive();
         } else {
             revert("Payment is not valid");
         }
@@ -121,56 +123,6 @@ contract PlayerFactory is TrollFactory {
         }
     }
     
-    function UpdateTypeOne() private {
-        for (uint256 i = 0; i < players.length; i++) {
-                if (players[i].key == msg.sender) {
-                    playerProfile[msg.sender].type1 = playerProfile[msg.sender].type1.add(1);
-                    players[i].type1 = players[i].type1.add(1);
-                    players[i].player_trolls.push(trolls.length);
-                }
-            }
-    }
-    
-    function UpdateTypeTwo() private {
-        for (uint256 i = 0; i < players.length; i++) {
-                if (players[i].key == msg.sender) {
-                    playerProfile[msg.sender].type2 = playerProfile[msg.sender].type2.add(1);
-                    players[i].type2 = players[i].type2.add(1);
-                    players[i].player_trolls.push(trolls.length);
-                }
-            }
-    }
-    
-    function UpdateTypeThree() private {
-        for (uint256 i = 0; i < players.length; i++) {
-                if (players[i].key == msg.sender) {
-                    playerProfile[msg.sender].type3 = playerProfile[msg.sender].type3.add(1);
-                    players[i].type3 = players[i].type3.add(1);
-                    players[i].player_trolls.push(trolls.length);
-                }
-            }
-    }
-    
-    function UpdateTypeFour() private {
-        for (uint256 i = 0; i < players.length; i++) {
-                if (players[i].key == msg.sender) {
-                    playerProfile[msg.sender].type4 = playerProfile[msg.sender].type4.add(1);
-                    players[i].type4 = players[i].type4.add(1);
-                    players[i].player_trolls.push(trolls.length);
-                }
-            }
-    }
-    
-    function UpdateTypeFive() private {
-        for (uint256 i = 0; i < players.length; i++) {
-                if (players[i].key == msg.sender) {
-                    playerProfile[msg.sender].type5 = playerProfile[msg.sender].type5.add(1);
-                    players[i].type5 = players[i].type5.add(1);
-                    players[i].player_trolls.push(trolls.length);
-                }
-            }
-    }
-    
     function CheckPayment() private {
         require (msg.value >= payment1);    
         require (msg.value >= payment2);
@@ -180,14 +132,14 @@ contract PlayerFactory is TrollFactory {
     }
     
     function DeActivatePlayer(address _key, uint256 _playerNum) public returns (bool success) {
-        require(playerProfile[_key].active == true);
+        require (playerProfile[_key].active == true);
         playerProfile[_key].active = false;
         players[_playerNum].active = false;
         return true;
     }
     
     function ReActivatePlayer(address _key, uint256 _playerNum) public returns (bool success) {
-        require(playerProfile[_key].active == false);
+        require (playerProfile[_key].active == false);
         playerProfile[_key].active = true;
         players[_playerNum].active = true;
         return true;
