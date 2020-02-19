@@ -3,7 +3,15 @@ pragma solidity 0.5.1;
 import"./Contract1.sol";
 import"./SafeMath.sol";
 
-contract PlayerFactory is TrollFactory {
+contract PlayerFactory {
+    
+   // address TrollFactory = 0x08970FEd061E7747CD9a38d680A601510CB659FB;
+    
+    TrollFactory TF;
+    
+    function SetFactory(address _key) public {
+        TF = TrollFactory(_key);
+    }
     
     using SafeMath for uint256;
     
@@ -47,7 +55,7 @@ contract PlayerFactory is TrollFactory {
     function NewTrollType1(string memory _name) public payable returns (bool success) {
         CheckPayment;
         if (msg.value == payment1) {
-            Newtroll_T1(_name);
+            TF.Newtroll_T1(_name);
             return true;
         } else {
             revert("Payment is not valid");
@@ -58,7 +66,7 @@ contract PlayerFactory is TrollFactory {
     function NewTrollType2(string memory _name) public payable returns (bool success) {
         CheckPayment;
         if (msg.value == payment2) {
-            Newtroll_T2(_name);
+            TF.Newtroll_T2(_name);
         } else {
             revert("Payment is not valid");
         }
@@ -69,7 +77,7 @@ contract PlayerFactory is TrollFactory {
     function NewTrollType3(string memory _name) public payable returns (bool success) {
         CheckPayment;
         if (msg.value == payment3) {
-            Newtroll_T3(_name);
+            TF.Newtroll_T3(_name);
         } else {
             revert("Payment is not valid");
         }
@@ -80,7 +88,7 @@ contract PlayerFactory is TrollFactory {
     function NewTrollType4(string memory _name) public payable returns (bool success) {
         CheckPayment;
         if (msg.value == payment4) {
-            Newtroll_T4(_name);
+            TF.Newtroll_T4(_name);
         } else {
             revert("Payment is not valid");
         }
@@ -91,7 +99,7 @@ contract PlayerFactory is TrollFactory {
     function NewTrollType5(string memory _name) public payable returns (bool success) {
         CheckPayment;
         if (msg.value == payment5) {
-            Newtroll_T5(_name);
+            TF.Newtroll_T5(_name);
         } else {
             revert("Payment is not valid");
         }
