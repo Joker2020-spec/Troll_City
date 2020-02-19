@@ -39,7 +39,7 @@ contract PlayerInteraction is PlayerFactory {
         for (uint i = 0; i < game_on.length; i++) {
             if (game_on[i].player1 == p1 && game_on[i].player2 == p2) {
                 game_on[i].finished = true;
-                emit SinglesGameShut(game_on[i], p1, p2);
+                emit SinglesGameShut(game_on[i].number, p1, p2);
             }
         }
         
