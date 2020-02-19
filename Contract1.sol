@@ -1,8 +1,16 @@
 pragma solidity ^0.5.1;
 
 import"./SafeMath.sol";
+import"./Contract2.sol";
 
 contract TrollFactory {
+    
+    PlayerFactory PF;
+    
+     function SetPlayerFactory(address _key) public {
+        PF = PlayerFactory(_key);
+    }
+    
     
     using SafeMath for uint256;
     
@@ -12,6 +20,7 @@ contract TrollFactory {
     uint256 public max_troll_level = 50;
     address public contract_owner;
     bool public contract_active;
+    
     
     struct Troll {
         string name;
@@ -32,6 +41,11 @@ contract TrollFactory {
     mapping (address => mapping(uint256 => Troll)) public troll_owner;
     
     Troll[] public trolls;
+    
+    modifier OnlyOwner () {
+        require (msg.sender == contract_owner);
+        _;
+    }
     
     constructor () public {
         total_trolls = 0;
