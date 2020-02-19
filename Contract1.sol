@@ -40,35 +40,35 @@ contract TrollFactory {
         contract_active = true;
     }
     
-    function Newtroll_T1(string memory _name) internal {
+    function Newtroll_T1(string calldata _name) external {
         total_trolls = trolls.length;
         Troll memory newTroll = Troll(_name, 1, 1, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
-    function Newtroll_T2(string memory _name) internal {
+    function Newtroll_T2(string calldata _name) external {
         total_trolls = trolls.length;
         Troll memory newTroll = Troll(_name, 2, 1, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
-    function Newtroll_T3(string memory _name) internal {
+    function Newtroll_T3(string calldata _name) external {
         total_trolls = trolls.length;
         Troll memory newTroll = Troll(_name, 3, 1, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
-    function Newtroll_T4(string memory _name) internal {
+    function Newtroll_T4(string calldata _name) external {
         total_trolls = trolls.length;
         Troll memory newTroll = Troll(_name, 4, 1, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
-    function Newtroll_T5(string memory _name) internal {
+    function Newtroll_T5(string calldata _name) external {
         total_trolls = trolls.length;
         Troll memory newTroll = Troll(_name, 5, 1, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
