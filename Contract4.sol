@@ -32,6 +32,11 @@ contract PlayerInteraction is TrollFactory {
     event NewSinglesGame(uint gameOpened, address player1, address player2);
     event SinglesGameShut(uint gameFinished, address player1, address player2);
     
+    modifier TrollsPlayable(uint t1, uint t2) {
+        require (trolls[t1].playable == true && trolls[t2].playable == true);
+        _;
+    }
+    
     function OpenSinglesGame(SportsGames _SG, GameChoice _GC, address p1, address p2) public {
         uint newGame = game_on.push(Game(game_on.length, 0, 0, p1, p2, _SG, _GC, true, false));
         games_open = games_open.add(newGame);
