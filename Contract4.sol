@@ -7,6 +7,8 @@ contract PlayerInteraction is TrollFactory {
     
     using SafeMath for uint256;
     
+    
+    uint8 team_max_multiplayer = 5;
     uint256 games_open = 0;
     uint256 games_finished = 0;
     uint256 games_played = 0;
@@ -32,8 +34,14 @@ contract PlayerInteraction is TrollFactory {
     event NewSinglesGame(uint gameOpened, address player1, address player2);
     event SinglesGameShut(uint gameFinished, address player1, address player2);
     
-    modifier TrollsPlayable(uint t1, uint t2) {
+    modifier TrollsPlayableSingles(uint t1, uint t2) {
         require (trolls[t1].playable == true && trolls[t2].playable == true);
+        _;
+    }
+    
+    modifier TrollsPlayableMulti(uint t1, uint t2, uint t3, uint t4, uint t5, uint t6, uint t7, uint t8, uint t9, uint t10) {
+        require (trolls[t1].playable == true && trolls[t2].playable == true && trolls[t3].playable == true && trolls[t4].playable == true && trolls[t5].playable == true);
+        require (trolls[t6].playable == true && trolls[t7].playable == true && trolls[t8].playable == true && trolls[t9].playable == true && trolls[t10].playable == true);
         _;
     }
     
