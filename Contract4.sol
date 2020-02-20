@@ -1,7 +1,7 @@
 pragma solidity ^0.5.1;
 
 import"./Contract1.sol";
-// import"./Contract2.sol";
+import"./Contract2.sol";
 import"./SafeMath.sol";
 
 contract PlayerInteraction is TrollFactory {
