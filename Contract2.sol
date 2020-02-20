@@ -139,6 +139,11 @@ contract PlayerFactory {
         require (msg.value >= payment5);
     }
     
+    function CheckPlayerActive(address p1, address p2) public view {
+        require (playerProfile[p1].active == true);
+        require (playerProfile[p2].active == true);
+    }
+    
     function DeActivatePlayer(address _key, uint256 _playerNum) public returns (bool success) {
         require (playerProfile[_key].active == true);
         playerProfile[_key].active = false;
