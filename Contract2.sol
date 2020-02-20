@@ -9,7 +9,7 @@ contract PlayerFactory {
     
     TrollFactory TF;
     
-    function SetFactory(address _key) public {
+    function SetTrollFactory(address _key) public {
         TF = TrollFactory(_key);
     }
     
