@@ -8,7 +8,7 @@ contract PlayerInteraction is TrollFactory {
     
     PlayerFactory PF;
     
-    function SetNewAddress(address _playerContract) public {
+    function SetPlayerAddress(address _playerContract) public {
         require (msg.sender == contract_owner, "Contract address can only be set by the contract owner");
         PF = PlayerFactory(_playerContract);
     }
