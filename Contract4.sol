@@ -53,6 +53,11 @@ contract PlayerInteraction is TrollFactory {
         _;
     }
     
+    modifier PlayersActive(address p1, address p2) {
+        PF.CheckPlayerActive(p1, p2);
+        _;
+    } 
+    
     constructor () public {
         contract_owner = msg.sender;
     }
@@ -70,10 +75,11 @@ contract PlayerInteraction is TrollFactory {
                 emit SinglesGameShut(game_on[i].number, p1, p2);
             }
         }
+        GamePlayed();
         
     }
     
-    function GamePlayed() public returns (bool finished) {
+    function GamePlayed() private returns (bool finished) {
         games_played++;
         return true;
     }
