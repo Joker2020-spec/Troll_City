@@ -1,17 +1,25 @@
 pragma solidity ^0.5.1;
 
 import"./Contract1.sol";
-import "./SafeMath.sol";
+// import"./Contract2.sol";
+import"./SafeMath.sol";
 
 contract PlayerInteraction is TrollFactory {
     
+    PlayerFactory PF;
+    
+    function SetNewAddress(address _playerContract) public {
+        require (msg.sender == contract_owner, "Contract address can only be set by the contract owner");
+        PF = PlayerFactory(_playerContract);
+    }
+    
     using SafeMath for uint256;
-    
-    
+
     uint8 team_max_multiplayer = 5;
     uint256 games_open = 0;
     uint256 games_finished = 0;
     uint256 games_played = 0;
+    address contract_owner;
     
     enum SportsGames {FOOTBALL, BASKETBALL, BASEBALL, GOLF} SportsGames SG;
     enum GameChoice {SINGLES, TEAMS} GameChoice GC;
@@ -43,6 +51,10 @@ contract PlayerInteraction is TrollFactory {
         require (trolls[t1].playable == true && trolls[t2].playable == true && trolls[t3].playable == true && trolls[t4].playable == true && trolls[t5].playable == true);
         require (trolls[t6].playable == true && trolls[t7].playable == true && trolls[t8].playable == true && trolls[t9].playable == true && trolls[t10].playable == true);
         _;
+    }
+    
+    constructor () public {
+        contract_owner = msg.sender;
     }
     
     function OpenSinglesGame(SportsGames _SG, GameChoice _GC, address p1, address p2) public {
