@@ -1,16 +1,9 @@
 pragma solidity ^0.5.1;
 
 import"./SafeMath.sol";
-import"./Contract2.sol";
+// import"./Contract2.sol";
 
 contract TrollFactory {
-    
-    PlayerFactory PF;
-    
-     function SetPlayerFactory(address _key) public {
-        PF = PlayerFactory(_key);
-    }
-    
     
     using SafeMath for uint256;
     
