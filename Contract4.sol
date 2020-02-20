@@ -15,6 +15,7 @@ contract PlayerInteraction is TrollFactory {
     
     using SafeMath for uint256;
 
+    uint8 max_single_player = 2;
     uint8 team_max_multiplayer = 5;
     uint256 games_open = 0;
     uint256 games_finished = 0;
@@ -25,7 +26,7 @@ contract PlayerInteraction is TrollFactory {
     enum GameChoice {SINGLES, TEAMS} GameChoice GC;
 
     
-    struct Game {
+    struct SinglesGame {
         uint number;
         uint score1;
         uint score2;
@@ -37,7 +38,7 @@ contract PlayerInteraction is TrollFactory {
         bool finished;
     }
     
-    Game[] public game_on;
+    SinglesGame[] public game_on;
     
     event NewSinglesGame(uint gameOpened, address player1, address player2);
     event SinglesGameShut(uint gameFinished, address player1, address player2);
@@ -63,7 +64,7 @@ contract PlayerInteraction is TrollFactory {
     }
     
     function OpenSinglesGame(SportsGames _SG, GameChoice _GC, address p1, address p2) public {
-        uint newGame = game_on.push(Game(game_on.length, 0, 0, p1, p2, _SG, _GC, true, false));
+        uint newGame = game_on.push(SinglesGame(game_on.length, 0, 0, p1, p2, _SG, _GC, true, false));
         games_open = games_open.add(newGame);
         emit NewSinglesGame(newGame, p1, p2);
     }
