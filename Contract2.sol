@@ -33,9 +33,9 @@ contract PlayerFactory is TrollFactory {
         bool active;
     }
     
-    PlayerCache[] public players;
+    PlayerCache[] private players;
     
-    mapping (address => PlayerCache) public playerProfile;
+    mapping (address => PlayerCache) private playerProfile;
     
     modifier CheckPlayer(uint _playerNum) {
         require (players[_playerNum].key == msg.sender);
@@ -134,7 +134,7 @@ contract PlayerFactory is TrollFactory {
         }
     }  
     
-    function GetPlayer(uint256 _player) public view returns (string memory, address, uint256, uint256, uint256, uint256, uint256, uint256, uint256, bool) {
+    function GetPlayer(uint256 _player) public view returns (string memory name, address key, uint256 ID, uint256 type1, uint256 type2, uint256 type3, uint256 type4, uint256 type5, uint256 total_trolls, bool active) {
         for (uint i = 0; i < players.length; i++) {
             if (players[i].id == _player) {
             return(players[i].name, 
@@ -180,4 +180,3 @@ contract PlayerFactory is TrollFactory {
     }
     
 }
- 
