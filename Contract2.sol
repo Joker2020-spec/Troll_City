@@ -1,4 +1,4 @@
-pragma solidity 0.5.1;
+pragma solidity ^0.5.1;
 
 import"./Contract1.sol";
 import"./SafeMath.sol";
@@ -108,8 +108,10 @@ contract PlayerFactory {
     }
     
     function GetPlayerTrolls(uint _player) public view returns (uint[] memory) {
-        for (uint256 i = 0; i < players.length; i++) {
-            return players[_player].player_trolls;
+        for (uint i = 0; i < players.length; i++) {
+           if (players[i].id == _player) {
+                return players[_player].player_trolls;
+           }
         }
     }  
     
