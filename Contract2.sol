@@ -37,6 +37,11 @@ contract PlayerFactory is TrollFactory {
     
     mapping (address => PlayerCache) public playerProfile;
     
+    modifier CheckPlayer(uint _playerNum) {
+        require (players[_playerNum].key == msg.sender);
+        _;
+    }
+    
     function NewPlayer(string memory _name) public {
         uint256[] memory list;
         PlayerCache memory newPlayer = PlayerCache({name: _name, key: msg.sender, id: players.length, type1: 0, type2: 0, type3: 0, type4: 0, type5: 0, player_trolls: list, active: true});
@@ -51,11 +56,13 @@ contract PlayerFactory is TrollFactory {
         return players[_playerNum].name;
     }
     
-    function NewTrollType1(string memory _name, uint _playerNum) public payable returns (bool success) {
+    function NewTrollType1(string memory _name, uint _playerNum) public payable CheckPlayer(_playerNum) returns (bool success) {
         CheckPayment;
         if (msg.value == payment1) {
             Newtroll_T1(_name);
             players[_playerNum].player_trolls.push(total_trolls);
+            players[_playerNum].type1 = players[_playerNum].type1.add(1);
+            playerProfile[msg.sender].type1 = playerProfile[msg.sender].type1.add(1);
             return true;
         } else {
             revert("Payment is not valid");
@@ -68,6 +75,8 @@ contract PlayerFactory is TrollFactory {
         if (msg.value == payment2) {
             Newtroll_T2(_name);
             players[_playerNum].player_trolls.push(total_trolls);
+            players[_playerNum].type2 = players[_playerNum].type2.add(1);
+            playerProfile[msg.sender].type2 = playerProfile[msg.sender].type2.add(1);
         } else {
             revert("Payment is not valid");
         }
@@ -80,6 +89,8 @@ contract PlayerFactory is TrollFactory {
         if (msg.value == payment3) {
             Newtroll_T3(_name);
             players[_playerNum].player_trolls.push(total_trolls);
+            players[_playerNum].type3 = players[_playerNum].type3.add(1);
+            playerProfile[msg.sender].type3 = playerProfile[msg.sender].type3.add(1);
         } else {
             revert("Payment is not valid");
         }
@@ -92,6 +103,8 @@ contract PlayerFactory is TrollFactory {
         if (msg.value == payment4) {
             Newtroll_T4(_name);
             players[_playerNum].player_trolls.push(total_trolls);
+            players[_playerNum].type4 = players[_playerNum].type4.add(1);
+            playerProfile[msg.sender].type4 = playerProfile[msg.sender].type4.add(1);
         } else {
             revert("Payment is not valid");
         }
@@ -104,6 +117,8 @@ contract PlayerFactory is TrollFactory {
         if (msg.value == payment5) {
             Newtroll_T5(_name);
             players[_playerNum].player_trolls.push(total_trolls);
+            players[_playerNum].type5 = players[_playerNum].type5.add(1);
+            playerProfile[msg.sender].type5 = playerProfile[msg.sender].type5.add(1);
         } else {
             revert("Payment is not valid");
         }
