@@ -63,10 +63,11 @@ contract PlayerFactory is TrollFactory {
         
     }
     
-    function NewTrollType2(string memory _name) public payable returns (bool success) {
+    function NewTrollType2(string memory _name, uint _playerNum) public payable returns (bool success) {
         CheckPayment;
         if (msg.value == payment2) {
             Newtroll_T2(_name);
+            players[_playerNum].player_trolls.push(total_trolls);
         } else {
             revert("Payment is not valid");
         }
@@ -74,10 +75,11 @@ contract PlayerFactory is TrollFactory {
         
     }
     
-    function NewTrollType3(string memory _name) public payable returns (bool success) {
+    function NewTrollType3(string memory _name, uint _playerNum) public payable returns (bool success) {
         CheckPayment;
         if (msg.value == payment3) {
             Newtroll_T3(_name);
+            players[_playerNum].player_trolls.push(total_trolls);
         } else {
             revert("Payment is not valid");
         }
@@ -85,10 +87,11 @@ contract PlayerFactory is TrollFactory {
         
     }
     
-    function NewTrollType4(string memory _name) public payable returns (bool success) {
+    function NewTrollType4(string memory _name, uint _playerNum) public payable returns (bool success) {
         CheckPayment;
         if (msg.value == payment4) {
             Newtroll_T4(_name);
+            players[_playerNum].player_trolls.push(total_trolls);
         } else {
             revert("Payment is not valid");
         }
@@ -96,11 +99,11 @@ contract PlayerFactory is TrollFactory {
         
     }
     
-    function NewTrollType5(string memory _name) public payable returns (bool success) {
+    function NewTrollType5(string memory _name, uint _playerNum) public payable returns (bool success) {
         CheckPayment;
         if (msg.value == payment5) {
             Newtroll_T5(_name);
-            
+            players[_playerNum].player_trolls.push(total_trolls);
         } else {
             revert("Payment is not valid");
         }
