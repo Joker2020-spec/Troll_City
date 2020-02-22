@@ -2,15 +2,22 @@ pragma solidity ^0.5.1;
 
 import"./Contract1.sol";
 import"./Contract2.sol";
+import"./Contract3.sol";
 import"./SafeMath.sol";
 
 contract PlayerInteraction is TrollFactory {
     
     PlayerFactory PF;
+    TrollStatFactory TS;
     
     function SetPlayerAddress(address _playerContract) public {
         require (msg.sender == contract_owner, "Contract address can only be set by the contract owner");
         PF = PlayerFactory(_playerContract);
+    }
+    
+    function SetStatFactoryAddress(address _statContract) public {
+        require (msg.sender == contract_owner, "Contract address can only be set by the contract owner");
+        TS = TrollStatFactory(_statContract);
     }
     
     using SafeMath for uint256;
@@ -83,6 +90,10 @@ contract PlayerInteraction is TrollFactory {
     function GamePlayed() private returns (bool finished) {
         games_played++;
         return true;
+    }
+    
+    function Attack(address p1, uint tid1) public {
+        TS.DecreaseStrength(p1, tid1, 5);
     }
 
     
