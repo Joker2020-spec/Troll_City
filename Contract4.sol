@@ -93,7 +93,15 @@ contract PlayerInteraction is TrollFactory {
     }
     
     function Attack(address p1, uint tid1) public {
-        TS.DecreaseStrength(p1, tid1, 5);
+        assert (msg.sender != p1);
+        TS.DecreaseStrength(p1, tid1, 2);
+        TS.DecreasePower(p1, tid1, 2);
+        TS.DecreaseSpeed(p1, tid1, 2);
+        TS.DecreaseHealth(p1, tid1, 6);
+    }
+    
+    function Sprint(uint tid) public {
+        TS.DecreaseAgility(msg.sender, tid, 2);
     }
 
     
