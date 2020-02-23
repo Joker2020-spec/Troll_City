@@ -99,7 +99,7 @@ contract PlayerInteraction is TrollFactory {
         return true;
     }
     
-    function Attack(address p1, uint tid1) public {
+    function Attack(address p1, uint tid1, uint _gameNum) public GameActive(_gameNum) {
         assert (msg.sender != p1);
         TS.DecreaseStrength(p1, tid1, 2);
         TS.DecreasePower(p1, tid1, 2);
@@ -107,7 +107,7 @@ contract PlayerInteraction is TrollFactory {
         TS.DecreaseHealth(p1, tid1, 6);
     }
     
-    function Sprint(uint tid) public {
+    function Sprint(uint tid, uint _gameNum) public GameActive(_gameNum) {
         TS.DecreaseAgility(msg.sender, tid, 2);
         TS.DecreaseCleverness(msg.sender, tid, 2);
     }
