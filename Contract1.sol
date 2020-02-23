@@ -49,35 +49,35 @@ contract TrollFactory {
     
     function Newtroll_T1(string memory _name) internal {
         total_trolls = trolls.length;
-        Troll memory newTroll = Troll(_name, 1, 1, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 1, 1, 100, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
     function Newtroll_T2(string memory _name) internal {
         total_trolls = trolls.length;
-        Troll memory newTroll = Troll(_name, 2, 1, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 2, 1, 100, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
     function Newtroll_T3(string memory _name) internal {
         total_trolls = trolls.length;
-        Troll memory newTroll = Troll(_name, 3, 1, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 3, 1, 100, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
     function Newtroll_T4(string memory _name) internal {
         total_trolls = trolls.length;
-        Troll memory newTroll = Troll(_name, 4, 1, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 4, 1, 100, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
     function Newtroll_T5(string memory _name) internal {
         total_trolls = trolls.length;
-        Troll memory newTroll = Troll(_name, 5, 1, 1, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 5, 1, 100, 0, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
