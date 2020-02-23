@@ -27,6 +27,7 @@ contract PlayerInteraction is TrollFactory {
     uint256 games_open = 0;
     uint256 games_finished = 0;
     uint256 games_played = 0;
+    uint256 max_singles_time = 5 minutes;
     address contract_owner;
     
     enum SportsGames {FOOTBALL, BASKETBALL, BASEBALL, GOLF} SportsGames SG;
@@ -37,6 +38,7 @@ contract PlayerInteraction is TrollFactory {
         uint number;
         uint score1;
         uint score2;
+        uint time;
         address player1;
         address player2;
         SportsGames sg;
@@ -66,12 +68,18 @@ contract PlayerInteraction is TrollFactory {
         _;
     } 
     
+    modifier GameActive(uint _gameNum) {
+        require (game_on[_gameNum].begun == true);
+        require (game_on[_gameNum].finished == false);
+        _;
+    }
+    
     constructor () public {
         contract_owner = msg.sender;
     }
     
     function OpenSinglesGame(SportsGames _SG, GameChoice _GC, address p1, address p2) public {
-        uint newGame = game_on.push(SinglesGame(game_on.length, 0, 0, p1, p2, _SG, _GC, true, false));
+        uint newGame = game_on.push(SinglesGame(game_on.length, 0, 0, now, p1, p2, _SG, _GC, true, false));
         games_open = games_open.add(newGame);
         emit NewSinglesGame(newGame, p1, p2);
     }
@@ -84,7 +92,6 @@ contract PlayerInteraction is TrollFactory {
             }
         }
         GamePlayed();
-        
     }
     
     function GamePlayed() private returns (bool finished) {
@@ -102,6 +109,7 @@ contract PlayerInteraction is TrollFactory {
     
     function Sprint(uint tid) public {
         TS.DecreaseAgility(msg.sender, tid, 2);
+        TS.DecreaseCleverness(msg.sender, tid, 2);
     }
 
     
