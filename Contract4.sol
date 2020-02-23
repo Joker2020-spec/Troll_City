@@ -111,6 +111,10 @@ contract PlayerInteraction is TrollFactory {
         TS.DecreaseAgility(msg.sender, tid, 2);
         TS.DecreaseCleverness(msg.sender, tid, 2);
     }
+    
+    function LevelDown(uint tid) public {
+        TS.DecreaseLifes(msg.sender, tid, 1);
+    }
 
     
 }
