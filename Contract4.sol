@@ -49,6 +49,7 @@ contract PlayerInteraction is TrollFactory {
     
     SinglesGame[] public game_on;
     
+    
     event NewSinglesGame(uint gameOpened, address player1, address player2);
     event SinglesGameShut(uint gameFinished, address player1, address player2);
     
@@ -97,6 +98,14 @@ contract PlayerInteraction is TrollFactory {
     function GamePlayed() private returns (bool finished) {
         games_played++;
         return true;
+    }
+    
+    function ShootNSwing(uint tid) public {
+        require (msg.sender == trolls[tid].owner);
+        TS.DecreaseAgility(msg.sender, trolls[tid].troll_number, 1);
+        TS.DecreaseStrength(msg.sender, trolls[tid].troll_number, 1);
+        TS.DecreasePower(msg.sender, trolls[tid].troll_number, 1);
+        TS.DecreaseSpeed(msg.sender, trolls[tid].troll_number, 1);
     }
     
     function Attack(address p1, uint tid1, uint _gameNum) public GameActive(_gameNum) {
