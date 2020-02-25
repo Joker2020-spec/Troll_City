@@ -132,6 +132,9 @@ contract PlayerInteraction is TrollFactory {
     function LevelDown(uint tid) public {
         TS.DecreaseLifes(msg.sender, tid, 1);
     }
+    
+    // Add function to check the game score. 
+    // 
 
     
 }
