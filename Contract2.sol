@@ -161,7 +161,7 @@ contract PlayerFactory is TrollFactory {
     }
     
     // NOTE - This is too call from another contract.
-    function CheckPlayerActive(address p1, address p2) public view {
+    function CheckPlayerActive(address p1, address p2) external view {
         require (playerProfile[p1].active == true);
         require (playerProfile[p2].active == true);
     }
