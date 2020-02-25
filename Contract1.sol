@@ -16,13 +16,13 @@ contract TrollFactory {
     bool public contract_active;
     
     // Add stat for times levels has been lost. --- Done.
-    // NOTE: "Cleverness" stat has been taken out, remove functions!
+    // NOTE: "Cleverness" stat has been taken out, remove functions.
     struct Troll {
         string name;
         uint32 type_of;
         uint256 troll_level;
         uint32 health;
-        uint32 lifes;
+        uint256 lifes;
         uint32 times_lost;
         uint32 strength;
         uint32 power;
@@ -90,11 +90,13 @@ contract TrollFactory {
     }
     
     
-    function LevelUp(address _key, uint128 _trollNumber) public {
+    function LevelUp(address _key, uint256 _trollNumber) public {
         for (uint128 i = 0; i < trolls.length; i++) {
             if (trolls[i].troll_number == _trollNumber) {
                 trolls[i].troll_level = trolls[i].troll_level.add(1);
                 troll_owner[_key][_trollNumber].troll_level = troll_owner[_key][_trollNumber].troll_level.add(1);
+                // Just Added - Incrementation of 1 life with every level up.
+                troll_owner[_key][_trollNumber].lifes = troll_owner[_key][_trollNumber].lifes.add(1);
             }
         }
     }
