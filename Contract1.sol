@@ -27,7 +27,6 @@ contract TrollFactory {
         uint256 agility;
         uint256 cleverness;
         uint256 troll_number;
-        uint256[] attack_calls;
         address owner;
         bool playable;
     }
@@ -50,40 +49,35 @@ contract TrollFactory {
     
     function Newtroll_T1(string memory _name) internal {
         total_trolls = trolls.length;
-        uint256[] storage init = trolls[total_trolls].attack_calls;
-        Troll memory newTroll = Troll(_name, 1, 1, 100, 0, 0, 0, 0, 0, 0, total_trolls, init, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 1, 1, 100, 10, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
     function Newtroll_T2(string memory _name) internal {
         total_trolls = trolls.length;
-        uint256[] storage init = trolls[total_trolls].attack_calls;
-        Troll memory newTroll = Troll(_name, 1, 1, 100, 0, 0, 0, 0, 0, 0, total_trolls, init, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 1, 1, 100, 20, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
     function Newtroll_T3(string memory _name) internal {
         total_trolls = trolls.length;
-        uint256[] storage init = trolls[total_trolls].attack_calls;
-        Troll memory newTroll = Troll(_name, 1, 1, 100, 0, 0, 0, 0, 0, 0, total_trolls, init, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 1, 1, 100, 30, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
     function Newtroll_T4(string memory _name) internal {
         total_trolls = trolls.length;
-        uint256[] storage init = trolls[total_trolls].attack_calls;
-        Troll memory newTroll = Troll(_name, 1, 1, 100, 0, 0, 0, 0, 0, 0, total_trolls, init, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 1, 1, 100, 40, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
     function Newtroll_T5(string memory _name) internal {
         total_trolls = trolls.length;
-        uint256[] storage init = trolls[total_trolls].attack_calls;
-        Troll memory newTroll = Troll(_name, 1, 1, 100, 0, 0, 0, 0, 0, 0, total_trolls, init, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 1, 1, 100, 5, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
