@@ -130,6 +130,7 @@ contract PlayerInteraction is TrollFactory {
         TS.DecreaseSpeed(msg.sender, trolls[tid].troll_number, 1);
         TS.DecreaseHealth(msg.sender, tid, 1);
         CheckPlayerSetScore(gn);
+        CheckScore(_gameNum);
     }
     
     // Change - Set new score for both players and decrease the balance.
