@@ -140,11 +140,17 @@ contract PlayerInteraction is TrollFactory {
         } else if (game_on[gn].player2 == msg.sender) {
             game_on[gn].score1 = game_on[gn].score2.add(1); 
         }
+        CheckScore(gn);
         
     }
     
     // Add function to check the game score. 
-    // 
+    function CheckScore(uint gn) private {
+        if (game_on[gn].score1 == 10 || game_on[gn].score2 == 10) {
+            game_on[gn].begun = game_on[gn].begun = false; 
+            game_on[gn].finished = game_on[gn].finished = true;
+        }
+    }
 
     
 }
