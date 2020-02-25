@@ -85,27 +85,7 @@ contract TrollFactory {
     function getTotalTrolls() public view returns(uint256) {
         return trolls.length;
     }
-    
-    
-    function LevelUp(address _key, uint256 _trollNumber) public {
-        for (uint128 i = 0; i < trolls.length; i++) {
-            if (trolls[i].troll_number == _trollNumber) {
-                trolls[i].troll_level = trolls[i].troll_level.add(1);
-                troll_owner[_key][_trollNumber].troll_level = troll_owner[_key][_trollNumber].troll_level.add(1);
-                troll_owner[_key][_trollNumber].lifes = troll_owner[_key][_trollNumber].lifes.add(1);
-            }
-        }
-    }
-    
-    function LevelDown(address _key, uint256 _trollNumber) public {
-        for (uint256 i = 0; i < trolls.length; i++) {
-            if (trolls[i].troll_number == _trollNumber) {
-                trolls[i].troll_level = trolls[i].troll_level.sub(1);
-                troll_owner[_key][_trollNumber].troll_level = troll_owner[_key][_trollNumber].troll_level.sub(1);
-                troll_owner[_key][_trollNumber].lifes = troll_owner[_key][_trollNumber].lifes.sub(1);
-            }
-        }
-    }
+
     
     function NewTrollOwner(address _old, address _new, uint256 _trollNumber) public returns (address) {
         require (trolls[_trollNumber].owner == _old);
