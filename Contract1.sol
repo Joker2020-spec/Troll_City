@@ -16,7 +16,7 @@ contract TrollFactory {
     bool public contract_active;
     
     // Add stat for times levels has been lost. --- Done.
-    // NOTE: "Cleverness" stat has been taken out, remove functions.
+    // NOTE: "Cleverness" stat has been taken out, remove functions!
     struct Troll {
         string name;
         uint32 type_of;
