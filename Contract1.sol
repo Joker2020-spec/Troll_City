@@ -95,6 +95,7 @@ contract TrollFactory {
             if (trolls[i].troll_number == _trollNumber) {
                 trolls[i].troll_level = trolls[i].troll_level.add(1);
                 troll_owner[_key][_trollNumber].troll_level = troll_owner[_key][_trollNumber].troll_level.add(1);
+                
                 // Just Added - Incrementation of 1 life with every level up.
                 troll_owner[_key][_trollNumber].lifes = troll_owner[_key][_trollNumber].lifes.add(1);
             }
