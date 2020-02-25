@@ -120,12 +120,14 @@ contract PlayerInteraction is TrollFactory {
         TS.DecreasePower(p1, tid1, 2);
         TS.DecreaseSpeed(p1, tid1, 2);
         TS.DecreaseHealth(p1, tid1, 6);
+        CheckScore(_gameNum);
     }
     
     // Change - Set new score for both players and decrease the balance.
     function Sprint(uint tid, uint _gameNum) public GameActive(_gameNum) {
         TS.DecreaseAgility(msg.sender, tid, 2);
         TS.DecreaseHealth(msg.sender, tid, 1);
+        CheckScore(_gameNum);
     }
     
     
