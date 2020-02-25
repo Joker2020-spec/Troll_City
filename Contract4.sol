@@ -110,7 +110,7 @@ contract PlayerInteraction is TrollFactory {
         TS.DecreasePower(msg.sender, trolls[tid].troll_number, 1);
         TS.DecreaseSpeed(msg.sender, trolls[tid].troll_number, 1);
         TS.DecreaseHealth(msg.sender, tid, 1);
-        CheckPlayer(gn);
+        CheckPlayerSetScore(gn);
     }
     
     // Change - Set new score for both players and decrease the balance.
@@ -134,7 +134,7 @@ contract PlayerInteraction is TrollFactory {
         // Add - Removal of troll level if lifes has been lost 10 times or more. 
     }
     
-    function CheckPlayer(uint gn) private {
+    function CheckPlayerSetScore(uint gn) private {
         if (game_on[gn].player1 == msg.sender) {
             game_on[gn].score1 = game_on[gn].score1.add(1);
         } else if (game_on[gn].player2 == msg.sender) {
