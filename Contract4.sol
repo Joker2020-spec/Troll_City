@@ -28,6 +28,7 @@ contract PlayerInteraction is TrollFactory {
     uint256 games_finished = 0;
     uint256 games_played = 0;
     uint256 max_singles_time = 5 minutes;
+    // Input "10" - Target Score to win match. 
     address contract_owner;
     
     enum SportsGames {FOOTBALL, BASKETBALL, BASEBALL, GOLF} SportsGames SG;
