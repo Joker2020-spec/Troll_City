@@ -43,11 +43,15 @@ contract TrollStatFactory is TrollFactory {
         return trolls[_trollNumber].agility;
     }
     
-    function IncreaseCleverness(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
-        trolls[_trollNumber].cleverness = trolls[_trollNumber].cleverness.add(_amount);
-        troll_owner[_key][_trollNumber].cleverness = troll_owner[_key][_trollNumber].cleverness.add(_amount);
-        return trolls[_trollNumber].cleverness;
-    }
+     function LevelUp(address _key, uint256 _trollNumber) public {
+        for (uint128 i = 0; i < trolls.length; i++) {
+            if (trolls[i].troll_number == _trollNumber) {
+                trolls[i].troll_level = trolls[i].troll_level.add(1);
+                troll_owner[_key][_trollNumber].troll_level = troll_owner[_key][_trollNumber].troll_level.add(1);
+                troll_owner[_key][_trollNumber].lifes = troll_owner[_key][_trollNumber].lifes.add(1);
+            }
+        }
+     }
     
     // "Decrease Stat Functions". //////////////////////////////////////////////////////////////////////////////
     function DecreaseHealth(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
@@ -86,11 +90,16 @@ contract TrollStatFactory is TrollFactory {
         return trolls[_trollNumber].agility;
     }
     
-    function DecreaseCleverness(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
-        trolls[_trollNumber].cleverness = trolls[_trollNumber].cleverness.sub(_amount);
-        troll_owner[_key][_trollNumber].cleverness = troll_owner[_key][_trollNumber].cleverness.sub(_amount);
-        return trolls[_trollNumber].cleverness;
+    function LevelDown(address _key, uint256 _trollNumber) public {
+        for (uint256 i = 0; i < trolls.length; i++) {
+            if (trolls[i].troll_number == _trollNumber) {
+                trolls[i].troll_level = trolls[i].troll_level.sub(1);
+                troll_owner[_key][_trollNumber].troll_level = troll_owner[_key][_trollNumber].troll_level.sub(1);
+                troll_owner[_key][_trollNumber].lifes = troll_owner[_key][_trollNumber].lifes.sub(1);
+            }
+        }
     }
+
 
     // "Update And De-Re Activate Trolls". //////////////////////////////////////////////////////////////////////
     function UpdateTrollType(address _key, uint256 _trollNumber) public returns (bool success) {
