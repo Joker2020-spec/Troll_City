@@ -6,6 +6,7 @@ import"./Contract1.sol";
 contract TrollStatFactory is TrollFactory {
     
     
+    // "Increase Stat Functions". /////////////////////////////////////////////////////////////////////////
     function IncreaseHealth(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
         trolls[_trollNumber].health = trolls[_trollNumber].health.add(_amount);
         troll_owner[_key][_trollNumber].health = troll_owner[_key][_trollNumber].health.add(_amount);
@@ -48,6 +49,7 @@ contract TrollStatFactory is TrollFactory {
         return trolls[_trollNumber].cleverness;
     }
     
+    // "Decrease Stat Functions". //////////////////////////////////////////////////////////////////////////////
     function DecreaseHealth(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
         trolls[_trollNumber].health = trolls[_trollNumber].health.sub(_amount);
         troll_owner[_key][_trollNumber].health = troll_owner[_key][_trollNumber].health.sub(_amount);
@@ -90,7 +92,7 @@ contract TrollStatFactory is TrollFactory {
         return trolls[_trollNumber].cleverness;
     }
 
-    
+    // "Update And De-Re Activate Trolls". //////////////////////////////////////////////////////////////////////
     function UpdateTrollType(address _key, uint256 _trollNumber) public returns (bool success) {
         require (trolls[_trollNumber].troll_level >= max_troll_level);
         if (trolls[_trollNumber].troll_level >= max_troll_level) {
