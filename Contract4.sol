@@ -102,6 +102,24 @@ contract PlayerInteraction is TrollFactory {
         return true;
     }
     
+    function CheckPlayerSetScore(uint gn) private {
+        if (game_on[gn].player1 == msg.sender) {
+            game_on[gn].score1 = game_on[gn].score1.add(1);
+        } else if (game_on[gn].player2 == msg.sender) {
+            game_on[gn].score1 = game_on[gn].score2.add(1); 
+        }
+        CheckScore(gn);
+        
+    }
+    
+    // Add function to check the game score. 
+    function CheckScore(uint gn) private {
+        if (game_on[gn].score1 == 10 || game_on[gn].score2 == 10) {
+            game_on[gn].begun = game_on[gn].begun = false; 
+            game_on[gn].finished = game_on[gn].finished = true;
+        }
+    }
+    
     // Change - Set new score for both players and decrease the balance.
     function ShootNSwing(uint tid, uint gn) public {
         require (msg.sender == trolls[tid].owner);
@@ -134,24 +152,6 @@ contract PlayerInteraction is TrollFactory {
     function LifeDown(uint tid) public {
         TS.DecreaseLifes(msg.sender, tid, 1);
         // Add - Removal of troll level if lifes has been lost 10 times or more. 
-    }
-    
-    function CheckPlayerSetScore(uint gn) private {
-        if (game_on[gn].player1 == msg.sender) {
-            game_on[gn].score1 = game_on[gn].score1.add(1);
-        } else if (game_on[gn].player2 == msg.sender) {
-            game_on[gn].score1 = game_on[gn].score2.add(1); 
-        }
-        CheckScore(gn);
-        
-    }
-    
-    // Add function to check the game score. 
-    function CheckScore(uint gn) private {
-        if (game_on[gn].score1 == 10 || game_on[gn].score2 == 10) {
-            game_on[gn].begun = game_on[gn].begun = false; 
-            game_on[gn].finished = game_on[gn].finished = true;
-        }
     }
 
     
