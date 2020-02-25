@@ -4,7 +4,6 @@ import"./SafeMath.sol";
 
 contract TrollFactory {
     
-    using SafeMath for uint32;
     using SafeMath for uint256;
     
     uint256 internal total_trolls;
