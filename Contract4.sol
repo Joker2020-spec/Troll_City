@@ -79,6 +79,8 @@ contract PlayerInteraction is TrollFactory {
         contract_owner = msg.sender;
     }
     
+    
+    // Change - 0, 0 to 100, 100 for each score and the decrease every move for each player. 
     function OpenSinglesGame(SportsGames _SG, GameChoice _GC, address p1, address p2) public {
         uint newGame = game_on.push(SinglesGame(game_on.length, 0, 0, now, p1, p2, _SG, _GC, true, false));
         games_open = games_open.add(newGame);
@@ -100,6 +102,7 @@ contract PlayerInteraction is TrollFactory {
         return true;
     }
     
+    // Change - Set new score for both players and decrease the balance.
     function ShootNSwing(uint tid) public {
         require (msg.sender == trolls[tid].owner);
         TS.DecreaseAgility(msg.sender, trolls[tid].troll_number, 1);
@@ -108,6 +111,7 @@ contract PlayerInteraction is TrollFactory {
         TS.DecreaseSpeed(msg.sender, trolls[tid].troll_number, 1);
     }
     
+    // Change - Set new score for both players and decrease the balance.
     function Attack(address p1, uint tid1, uint _gameNum) public GameActive(_gameNum) {
         assert (msg.sender != p1);
         TS.DecreaseStrength(p1, tid1, 2);
@@ -116,10 +120,12 @@ contract PlayerInteraction is TrollFactory {
         TS.DecreaseHealth(p1, tid1, 6);
     }
     
+    // Change - Set new score for both players and decrease the balance.
     function Sprint(uint tid, uint _gameNum) public GameActive(_gameNum) {
         TS.DecreaseAgility(msg.sender, tid, 2);
         TS.DecreaseCleverness(msg.sender, tid, 2);
     }
+    
     
     function LevelDown(uint tid) public {
         TS.DecreaseLifes(msg.sender, tid, 1);
