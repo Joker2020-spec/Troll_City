@@ -17,9 +17,7 @@ contract Time {
     }
     
     function CheckTime(uint _limit) public returns (string memory) {
-        if (limit[_limit].time < limit[_limit].time + 5 minutes) {
-            return "Ok";
-        } else if (limit[_limit].time + 5 minutes >= now) {
+        if (limit[_limit].time + 5 minutes <= now) {
             limit[_limit].finished = true;
             return "Time finished";
         }
