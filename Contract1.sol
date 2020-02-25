@@ -14,7 +14,7 @@ contract TrollFactory {
     address public contract_owner;
     bool public contract_active;
     
-    
+    // Add stat for times levels has been lost. 
     struct Troll {
         string name;
         uint256 type_of;
