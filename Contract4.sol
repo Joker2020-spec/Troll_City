@@ -131,6 +131,7 @@ contract PlayerInteraction is TrollFactory {
     
     function LevelDown(uint tid) public {
         TS.DecreaseLifes(msg.sender, tid, 1);
+        // Add - Removal of troll level if lifes has been lost 10 times or more. 
     }
     
     // Add function to check the game score. 
