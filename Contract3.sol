@@ -1,9 +1,11 @@
 pragma solidity ^0.5.1;
 
+
+import"./Contract1.sol";
 import"./Contract2.sol";
 
 
-contract TrollStatFactory is PlayerFactory {
+contract TrollStatFactory is TrollFactory {
     
     
     // "Increase Stat Functions". /////////////////////////////////////////////////////////////////////////
