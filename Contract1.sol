@@ -48,9 +48,9 @@ contract TrollFactory {
     
     function Newtroll_T1(string memory _name) internal {
         total_trolls++;
-        Troll memory newTroll = Troll(_name, 1, 1, 100, 10, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
-        troll_owner[msg.sender][total_trolls] = newTroll;
-        trolls.push(newTroll);
+        trolls.push(Troll(_name, 1, 1, 100, 10, 0, 0, 0, 0, 0, total_trolls, msg.sender, true));
+        troll_owner[msg.sender][total_trolls] = Troll(_name, 1, 1, 100, 10, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        // trolls.push(newTroll);
     }
     
     function Newtroll_T2(string memory _name) internal {
