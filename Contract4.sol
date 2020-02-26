@@ -12,7 +12,7 @@ contract PlayerInteraction is TrollFactory {
     
     function SetPlayerAddress(address _playerContract) public {
         require (msg.sender == contract_owner, "Contract address can only be set by the contract owner");
-        PF = PlayerFactory(_playerContract);
+       PF = PlayerFactory(_playerContract);
     }
     
     function SetStatFactoryAddress(address _statContract) public {
@@ -53,6 +53,8 @@ contract PlayerInteraction is TrollFactory {
     
     event NewSinglesGame(uint gameOpened, address player1, address player2);
     event SinglesGameShut(uint gameFinished, address player1, address player2);
+    
+    // event ShootnSwing(address p, uint t, uint s);
     
     modifier TrollsPlayableSingles(uint t1, uint t2) {
         require (trolls[t1].playable == true && trolls[t2].playable == true);
@@ -130,7 +132,7 @@ contract PlayerInteraction is TrollFactory {
         TS.DecreaseSpeed(msg.sender, trolls[tid].troll_number, 1);
         TS.DecreaseHealth(msg.sender, tid, 1);
         CheckPlayerSetScore(gn);
-        CheckScore(_gameNum);
+        CheckScore(gn);
     }
     
     // Change - Set new score for both players and decrease the balance.
@@ -140,6 +142,7 @@ contract PlayerInteraction is TrollFactory {
         TS.DecreasePower(p1, tid1, 2);
         TS.DecreaseSpeed(p1, tid1, 2);
         TS.DecreaseHealth(p1, tid1, 6);
+        CheckPlayerSetScore(_gameNum);
         CheckScore(_gameNum);
     }
     
