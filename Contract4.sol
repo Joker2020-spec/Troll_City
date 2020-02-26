@@ -5,13 +5,19 @@ import"./Contract2.sol";
 import"./Contract3.sol";
 import"./SafeMath.sol";
 
-contract PlayerInteraction is PlayerFactory {
+contract PlayerInteraction is TrollFactory {
     
+    TrollFactory TF;
     PlayerFactory PF;
     TrollStatFactory TS;
     
-    function SetPlayerAddress(address _playerContract) public {
+    function SetTrollFactoryAddress(address _TrollFactory) public {
         require (msg.sender == contract_owner, "Contract address can only be set by the contract owner");
+        TF = TrollFactory(_TrollFactory);
+    }
+    
+    function SetPlayerAddress(address _playerContract) public {
+       require (msg.sender == contract_owner, "Contract address can only be set by the contract owner");
        PF = PlayerFactory(_playerContract);
     }
     
@@ -158,6 +164,10 @@ contract PlayerInteraction is PlayerFactory {
     
     function Test(uint tid, uint game) public GameActive(game) {
         TS.IncreaseHealth(msg.sender, tid, 10);
+    }
+    
+    function Test2(uint tid, uint game) public GameActive(game) {
+        TS.DecreaseHealth(msg.sender, tid, 10);
     }
     
     // Not Working!
