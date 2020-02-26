@@ -5,7 +5,7 @@ import"./Contract2.sol";
 import"./Contract3.sol";
 import"./SafeMath.sol";
 
-contract PlayerInteraction is TrollFactory {
+contract PlayerInteraction is PlayerFactory {
     
     PlayerFactory PF;
     TrollStatFactory TS;
@@ -151,6 +151,10 @@ contract PlayerInteraction is TrollFactory {
         TS.DecreaseAgility(msg.sender, tid, 2);
         TS.DecreaseHealth(msg.sender, tid, 1);
         CheckScore(_gameNum);
+    }
+    
+    function Test(uint tid, uint game) public GameActive(game) {
+        TS.IncreaseHealth(msg.sender, tid, 10);
     }
     
     
