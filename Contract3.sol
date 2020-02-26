@@ -1,9 +1,9 @@
 pragma solidity ^0.5.1;
 
-import"./Contract1.sol";
+import"./Contract2.sol";
 
 
-contract TrollStatFactory is TrollFactory {
+contract TrollStatFactory is PlayerFactory {
     
     
     // "Increase Stat Functions". /////////////////////////////////////////////////////////////////////////
@@ -43,7 +43,8 @@ contract TrollStatFactory is TrollFactory {
         return trolls[_trollNumber].agility;
     }
     
-     function LevelUp(address _key, uint256 _trollNumber) public {
+    // Not Working!
+    function LevelUp(address _key, uint256 _trollNumber) public {
         for (uint128 i = 0; i < trolls.length; i++) {
             if (trolls[i].troll_number == _trollNumber) {
                 trolls[i].troll_level = trolls[i].troll_level.add(1);
@@ -90,6 +91,7 @@ contract TrollStatFactory is TrollFactory {
         return trolls[_trollNumber].agility;
     }
     
+    // Not Working!
     function LevelDown(address _key, uint256 _trollNumber) public {
         for (uint256 i = 0; i < trolls.length; i++) {
             if (trolls[i].troll_number == _trollNumber) {
