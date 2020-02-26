@@ -5,7 +5,7 @@ import"./Contract2.sol";
 import"./Contract3.sol";
 import"./SafeMath.sol";
 
-contract PlayerInteraction is TrollFactory {
+contract PlayerInteraction {
     
     TrollFactory TF;
     PlayerFactory PF;
@@ -62,16 +62,6 @@ contract PlayerInteraction is TrollFactory {
     
     // event ShootnSwing(address p, uint t, uint s);
     
-    modifier TrollsPlayableSingles(uint t1, uint t2) {
-        require (trolls[t1].playable == true && trolls[t2].playable == true);
-        _;
-    }
-    
-    modifier TrollsPlayableMulti(uint t1, uint t2, uint t3, uint t4, uint t5, uint t6, uint t7, uint t8, uint t9, uint t10) {
-        require (trolls[t1].playable == true && trolls[t2].playable == true && trolls[t3].playable == true && trolls[t4].playable == true && trolls[t5].playable == true);
-        require (trolls[t6].playable == true && trolls[t7].playable == true && trolls[t8].playable == true && trolls[t9].playable == true && trolls[t10].playable == true);
-        _;
-    }
     
     modifier PlayersActive(address p1, address p2) {
         PF.CheckPlayerActive(p1, p2);
@@ -130,32 +120,18 @@ contract PlayerInteraction is TrollFactory {
     }
     
     // Change - Set new score for both players and decrease the balance.
-    // Not Working!
     function ShootNSwing(uint tid, uint gn) public {
-        require (msg.sender == trolls[tid].owner);
-        TS.DecreaseAgility(msg.sender, trolls[tid].troll_number, 1);
-        TS.DecreaseStrength(msg.sender, trolls[tid].troll_number, 1);
-        TS.DecreasePower(msg.sender, trolls[tid].troll_number, 1);
-        TS.DecreaseSpeed(msg.sender, trolls[tid].troll_number, 1);
+        // require (msg.sender == trolls[tid].owner);
+        TS.DecreaseAgility(msg.sender, tid, 1);
+        TS.DecreaseStrength(msg.sender, tid, 1);
+        TS.DecreasePower(msg.sender, tid, 1);
+        TS.DecreaseSpeed(msg.sender, tid, 1);
         TS.DecreaseHealth(msg.sender, tid, 1);
         CheckPlayerSetScore(gn);
         CheckScore(gn);
     }
     
     // Change - Set new score for both players and decrease the balance.
-    // Not Working!
-    function Attack(address p1, uint tid1, uint _gameNum) public GameActive(_gameNum) {
-        assert (msg.sender != p1);
-        TS.DecreaseStrength(p1, tid1, 2);
-        TS.DecreasePower(p1, tid1, 2);
-        TS.DecreaseSpeed(p1, tid1, 2);
-        TS.DecreaseHealth(p1, tid1, 6);
-        CheckPlayerSetScore(_gameNum);
-        CheckScore(_gameNum);
-    }
-    
-    // Change - Set new score for both players and decrease the balance.
-    // Not Working!
     function Sprint(uint tid, uint _gameNum) public GameActive(_gameNum) {
         TS.DecreaseAgility(msg.sender, tid, 2);
         TS.DecreaseHealth(msg.sender, tid, 1);
@@ -170,7 +146,6 @@ contract PlayerInteraction is TrollFactory {
         TS.DecreaseHealth(msg.sender, tid, 10);
     }
     
-    // Not Working!
     function LifeDown(uint tid) public {
         TS.DecreaseLifes(msg.sender, tid, 1);
         // Add - Removal of troll level if lifes has been lost 10 times or more. 
