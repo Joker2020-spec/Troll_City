@@ -87,7 +87,7 @@ contract TrollFactory {
     }
 
     
-    function NewTrollOwner(address _old, address _new, uint256 _trollNumber) public returns (address) {
+    function NewTrollOwner(address _old, address _new, uint256 _trollNumber) internal returns (address) {
         require (trolls[_trollNumber].owner == _old);
         trolls[_trollNumber].owner = _new;
         troll_owner[_old][_trollNumber].owner = _new;
@@ -95,7 +95,7 @@ contract TrollFactory {
         return trolls[_trollNumber].owner;
     }
     
-    function ChangeTrollName(uint256 _trollNumber, string memory _newName) public {
+    function ChangeTrollName(uint256 _trollNumber, string memory _newName) internal {
         trolls[_trollNumber].name = _newName;
         troll_owner[msg.sender][_trollNumber].name = _newName;
     }
