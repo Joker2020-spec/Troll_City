@@ -124,6 +124,7 @@ contract PlayerInteraction is PlayerFactory {
     }
     
     // Change - Set new score for both players and decrease the balance.
+    // Not Working!
     function ShootNSwing(uint tid, uint gn) public {
         require (msg.sender == trolls[tid].owner);
         TS.DecreaseAgility(msg.sender, trolls[tid].troll_number, 1);
@@ -136,6 +137,7 @@ contract PlayerInteraction is PlayerFactory {
     }
     
     // Change - Set new score for both players and decrease the balance.
+    // Not Working!
     function Attack(address p1, uint tid1, uint _gameNum) public GameActive(_gameNum) {
         assert (msg.sender != p1);
         TS.DecreaseStrength(p1, tid1, 2);
@@ -147,6 +149,7 @@ contract PlayerInteraction is PlayerFactory {
     }
     
     // Change - Set new score for both players and decrease the balance.
+    // Not Working!
     function Sprint(uint tid, uint _gameNum) public GameActive(_gameNum) {
         TS.DecreaseAgility(msg.sender, tid, 2);
         TS.DecreaseHealth(msg.sender, tid, 1);
@@ -157,7 +160,7 @@ contract PlayerInteraction is PlayerFactory {
         TS.IncreaseHealth(msg.sender, tid, 10);
     }
     
-    
+    // Not Working!
     function LifeDown(uint tid) public {
         TS.DecreaseLifes(msg.sender, tid, 1);
         // Add - Removal of troll level if lifes has been lost 10 times or more. 
