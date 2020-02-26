@@ -5,7 +5,7 @@ import"./Contract1.sol";
 import"./Contract2.sol";
 
 
-contract TrollStatFactory is TrollFactory {
+contract TrollStatFactory is PlayerFactory {
     
     
     // "Increase Stat Functions". /////////////////////////////////////////////////////////////////////////
