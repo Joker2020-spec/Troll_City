@@ -180,4 +180,12 @@ contract PlayerFactory is TrollFactory {
         return true;
     }
     
+    function ExchangeOwnership(address _new, uint tid) public {
+        NewTrollOwner(msg.sender, _new, tid);
+    }
+    
+    function NewTrollName(uint tid, string memory _newName) public {
+        ChangeTrollName(tid, _newName);
+    }
+    
 }
