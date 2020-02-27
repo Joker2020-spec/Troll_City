@@ -42,6 +42,11 @@ contract PlayerFactory is TrollFactory {
         _;
     }
     
+     modifier PlayersActive(address p1, address p2) {
+        CheckPlayerActive(p1, p2);
+        _;
+    } 
+    
     function NewPlayer(string memory _name) public {
         uint256[] memory list;
         PlayerCache memory newPlayer = PlayerCache({name: _name, key: msg.sender, id: players.length, type1: 0, type2: 0, type3: 0, type4: 0, type5: 0, player_trolls: list, active: true});
@@ -161,7 +166,7 @@ contract PlayerFactory is TrollFactory {
     }
     
     // NOTE - This is too call from another contract.
-    function CheckPlayerActive(address p1, address p2) external view {
+    function CheckPlayerActive(address p1, address p2) internal view {
         require (playerProfile[p1].active == true);
         require (playerProfile[p2].active == true);
     }
