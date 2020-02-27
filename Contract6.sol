@@ -16,6 +16,7 @@ contract StatMarketPlace {
     TrollStatFactory TS;
     
     address public owner;
+    address public wallet;
     uint public total_buys;
     uint public total_sells; 
     
@@ -27,6 +28,10 @@ contract StatMarketPlace {
     function SetTrollStatFactoryAddress(address key) public {
         require (msg.sender == owner);
         TS = TrollStatFactory(key);
+    }
+    
+    function SetWalletAddress(address key) public {
+        wallet = key;
     }
     
     function BuyHealth(uint price, uint _troll) public {
