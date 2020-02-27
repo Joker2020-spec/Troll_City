@@ -14,15 +14,6 @@ contract PlayerInteraction {
         TS = TrollStatFactory(_statContract);
     }
     
-    TrollFactory TF;
-    
-    function SetTrollFactory(address _key) public {
-       TF = TrollFactory(_key);
-    }
-    
-    function TrollOwner(uint tid) private view {
-        TS.OnlyTrollOwner(tid);
-    }
     
     using SafeMath for uint256;
 
@@ -64,6 +55,11 @@ contract PlayerInteraction {
     modifier GameActive(uint _gameNum) {
         require (game_on[_gameNum].begun == true);
         require (game_on[_gameNum].finished == false);
+        _;
+    }
+    
+    modifier MatchPlayer(uint _gameNum) {
+        require (msg.sender == game_on[_gameNum].player1 || msg.sender == game_on[_gameNum].player2);
         _;
     }
     
@@ -113,32 +109,31 @@ contract PlayerInteraction {
     }
     
     // Change - Set new score for both players and decrease the balance.
-    function ShootNSwing(uint tid, uint gn) public {
-        TrollOwner(tid);  <<<<<< REMOVE NOT WORKING!
+    function ShootNSwing(uint tid, uint _gameNum) public GameActive(_gameNum) MatchPlayer(_gameNum) {
         TS.DecreaseAgility(msg.sender, tid, 1);
         TS.DecreaseStrength(msg.sender, tid, 1);
         TS.DecreasePower(msg.sender, tid, 1);
         TS.DecreaseSpeed(msg.sender, tid, 1);
         TS.DecreaseHealth(msg.sender, tid, 1);
-        CheckPlayerSetScore(gn);
-        CheckScore(gn);
+        CheckPlayerSetScore(_gameNum);
+        CheckScore(_gameNum);
     }
     
     // Change - Set new score for both players and decrease the balance.
-    function Sprint(uint tid, uint _gameNum) public GameActive(_gameNum) {
+    function Sprint(uint tid, uint _gameNum) public GameActive(_gameNum) MatchPlayer(_gameNum) {
         TS.DecreaseAgility(msg.sender, tid, 2);
         TS.DecreaseHealth(msg.sender, tid, 1);
         CheckPlayerSetScore(_gameNum);
         CheckScore(_gameNum);
     }
     
-    function Test(uint tid, uint _gameNum) public GameActive(_gameNum) {
+    function Test(uint tid, uint _gameNum) public GameActive(_gameNum) MatchPlayer(_gameNum) {
         TS.IncreaseHealth(msg.sender, tid, 10);
         CheckPlayerSetScore(_gameNum);
         CheckScore(_gameNum);
     }
     
-    function Test2(uint tid, uint _gameNum) public GameActive(_gameNum) {
+    function Test2(uint tid, uint _gameNum) public GameActive(_gameNum) MatchPlayer(_gameNum) {
         TS.DecreaseHealth(msg.sender, tid, 10);
         CheckPlayerSetScore(_gameNum);
         CheckScore(_gameNum);
