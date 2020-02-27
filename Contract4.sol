@@ -133,11 +133,22 @@ contract PlayerInteraction {
         CheckScore(_gameNum);
     }
     
-    function Test2(uint tid, uint _gameNum) public GameActive(_gameNum) MatchPlayer(_gameNum) {
-        TS.DecreaseHealth(msg.sender, tid, 10);
+    function Block(uint tid, uint _gameNum) public GameActive(_gameNum) MatchPlayer(_gameNum) {
+        TS.DecreaseAgility(msg.sender, tid, 1);
+        TS.DecreaseStrength(msg.sender, tid, 2);
+        TS.DecreasePower(msg.sender, tid, 1);
         CheckPlayerSetScore(_gameNum);
         CheckScore(_gameNum);
-       
+    }
+    
+    function PowerShot(uint tid, uint _gameNum) public {
+        TS.DecreaseAgility(msg.sender, tid, 5);
+        TS.DecreaseStrength(msg.sender, tid, 5);
+        TS.DecreasePower(msg.sender, tid, 5);
+        TS.DecreaseSpeed(msg.sender, tid, 5);
+        TS.DecreaseHealth(msg.sender, tid, 3);
+        CheckPlayerSetScore(_gameNum);
+        CheckScore(_gameNum);
     }
     
     function LifeDown(uint tid) public {
