@@ -54,7 +54,7 @@ contract PlayerFactory is TrollFactory {
         players.push(newPlayer);
     }
     
-    function ChangePlayerName(string memory _newName, uint _playerNum) public returns (string memory name) {
+    function ChangePlayerName(string memory _newName, uint _playerNum) public CheckPlayer(_playerNum) returns (string memory name) {
         require (msg.sender == playerProfile[msg.sender].key);
         playerProfile[msg.sender].name = _newName;
         players[_playerNum].name = _newName;
@@ -185,11 +185,11 @@ contract PlayerFactory is TrollFactory {
         return true;
     }
     
-    function ExchangeOwnership(address _new, uint tid) public {
+    function ExchangeOwnership(address _new, uint tid) public OnlyTrollOwner(tid) {
         NewTrollOwner(msg.sender, _new, tid);
     }
     
-    function NewTrollName(uint tid, string memory _newName) public {
+    function NewTrollName(uint tid, string memory _newName) public OnlyTrollOwner(tid) {
         ChangeTrollName(tid, _newName);
     }
     
