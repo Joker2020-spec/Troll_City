@@ -7,23 +7,22 @@ import"./SafeMath.sol";
 
 contract PlayerInteraction {
     
-    TrollFactory TF;
-    PlayerFactory PF;
     TrollStatFactory TS;
-    
-    function SetTrollFactoryAddress(address _TrollFactory) public {
-        require (msg.sender == contract_owner, "Contract address can only be set by the contract owner");
-        TF = TrollFactory(_TrollFactory);
-    }
-    
-    function SetPlayerAddress(address _playerContract) public {
-       require (msg.sender == contract_owner, "Contract address can only be set by the contract owner");
-       PF = PlayerFactory(_playerContract);
-    }
     
     function SetStatFactoryAddress(address _statContract) public {
         require (msg.sender == contract_owner, "Contract address can only be set by the contract owner");
         TS = TrollStatFactory(_statContract);
+    }
+    
+    TrollFactory TF;
+    
+    function SetTrollFactory(address _key) public {
+       TF = TrollFactory(_key);
+    }
+    
+    modifier OnlyTrollOwner(uint tid) {
+        TF.OnlyTrollOwner(tid);
+        _;
     }
     
     using SafeMath for uint256;
@@ -61,12 +60,7 @@ contract PlayerInteraction {
     event SinglesGameShut(uint gameFinished, address player1, address player2);
     
     // event ShootnSwing(address p, uint t, uint s);
-    
-    
-    modifier PlayersActive(address p1, address p2) {
-        PF.CheckPlayerActive(p1, p2);
-        _;
-    } 
+
     
     modifier GameActive(uint _gameNum) {
         require (game_on[_gameNum].begun == true);
@@ -120,8 +114,7 @@ contract PlayerInteraction {
     }
     
     // Change - Set new score for both players and decrease the balance.
-    function ShootNSwing(uint tid, uint gn) public {
-        // require (msg.sender == trolls[tid].owner);
+    function ShootNSwing(uint tid, uint gn) public OnlyTrollOwner(tid) {
         TS.DecreaseAgility(msg.sender, tid, 1);
         TS.DecreaseStrength(msg.sender, tid, 1);
         TS.DecreasePower(msg.sender, tid, 1);
@@ -135,15 +128,21 @@ contract PlayerInteraction {
     function Sprint(uint tid, uint _gameNum) public GameActive(_gameNum) {
         TS.DecreaseAgility(msg.sender, tid, 2);
         TS.DecreaseHealth(msg.sender, tid, 1);
+        CheckPlayerSetScore(_gameNum);
         CheckScore(_gameNum);
     }
     
-    function Test(uint tid, uint game) public GameActive(game) {
+    function Test(uint tid, uint _gameNum) public GameActive(_gameNum) {
         TS.IncreaseHealth(msg.sender, tid, 10);
+        CheckPlayerSetScore(_gameNum);
+        CheckScore(_gameNum);
     }
     
-    function Test2(uint tid, uint game) public GameActive(game) {
+    function Test2(uint tid, uint _gameNum) public GameActive(_gameNum) {
         TS.DecreaseHealth(msg.sender, tid, 10);
+        CheckPlayerSetScore(_gameNum);
+        CheckScore(_gameNum);
+       
     }
     
     function LifeDown(uint tid) public {
