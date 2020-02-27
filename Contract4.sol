@@ -21,7 +21,7 @@ contract PlayerInteraction {
     }
     
     modifier OnlyTrollOwner(uint tid) {
-        TF.OnlyTrollOwner(tid);
+        TS.OnlyTrollOwner(tid);
         _;
     }
     
