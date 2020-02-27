@@ -35,11 +35,36 @@ contract StatMarketPlace {
     }
     
     function BuyHealth(uint price, uint _troll) public {
+        require (price >= 1);
         uint256 hp = price.div(10).mul(20);
         daitoken.transfer(wallet, price);
         TS.IncreaseHealth(msg.sender, _troll, hp);
     }
-    
-    
-    
 }
+
+contract DaiFaucet is StatMarketPlace  {
+    
+    DaiToken daitoken;
+    
+	event Withdrawal(address indexed to, uint amount);
+	event Deposit(address indexed from, uint amount);
+	
+
+	// Give out Dai to anyone who asks
+	function withdraw(uint withdraw_amount) public {
+		// Limit withdrawal amount
+		require(withdraw_amount <= 0.1 ether);
+		require(daitoken.balanceOf(address(this)) >= withdraw_amount,
+			"Insufficient balance in faucet for withdrawal request");
+		// Send the amount to the address that requested it
+		daitoken.transfer(msg.sender, withdraw_amount);
+		emit Withdrawal(msg.sender, withdraw_amount);
+	}
+	
+	// Accept any incoming amount
+	function () external payable {
+		emit Deposit(msg.sender, msg.value);
+	}
+}
+    
+    
