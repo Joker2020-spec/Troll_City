@@ -1,6 +1,14 @@
 pragma solidity ^0.5.1;
 
+import"./Contract4.sol";
+
 contract Time {
+    
+    PlayerInteraction PI;
+    
+    function SetInteractionAddress(address _contract) public {
+        PI = PlayerInteraction(_contract);
+    }
     
     uint256 max_singles_time = 5 minutes;
     
@@ -10,7 +18,16 @@ contract Time {
         bool finished;
     }
     
+    struct Bet {
+        uint bet1;
+        uint bet2;
+        uint payout;
+        uint house;
+        address winner;
+    }
+    
     Limit[] public limit;
+    Bet[] public bets;
     
     function StartTime() public {
         limit.push(Limit(now, true, false));
@@ -22,5 +39,9 @@ contract Time {
             return "Time finished";
         }
     }
+    
+    function NewBet(uint _bet1, uint _bet2) public {
+        bets.push(Bet(_bet1, _bet2, 0, 0, msg.sender));
+        
+    }
 }
-
