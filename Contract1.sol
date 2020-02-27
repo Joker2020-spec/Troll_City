@@ -39,8 +39,9 @@ contract TrollFactory {
         _;
     }
     
-    function OnlyTrollOwner (uint _trollNumber) public view {
+    modifier OnlyTrollOwner (uint _trollNumber) {
         require (msg.sender == trolls[_trollNumber].owner);
+        _;
     }
 
     
