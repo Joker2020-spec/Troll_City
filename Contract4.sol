@@ -1,7 +1,6 @@
 pragma solidity ^0.5.1;
 
-import"./Contract1.sol";
-import"./Contract2.sol";
+
 import"./Contract3.sol";
 import"./SafeMath.sol";
 
@@ -127,8 +126,8 @@ contract PlayerInteraction {
         CheckScore(_gameNum);
     }
     
-    function Test(uint tid, uint _gameNum) public GameActive(_gameNum) MatchPlayer(_gameNum) {
-        TS.IncreaseHealth(msg.sender, tid, 10);
+    function Throw(uint tid, uint _gameNum) public GameActive(_gameNum) MatchPlayer(_gameNum) {
+        TS.DecreaseHealth(msg.sender, tid, 3);
         CheckPlayerSetScore(_gameNum);
         CheckScore(_gameNum);
     }
