@@ -9,37 +9,37 @@ contract TrollStatFactory is PlayerFactory {
     
     
     // "Increase Stat Functions". /////////////////////////////////////////////////////////////////////////
-    function IncreaseHealth(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+    function IncreaseHealth(address _key, uint256 _trollNumber, uint8 _amount) public OnlyTrollOwner(_trollNumber) returns (uint256) {
         trolls[_trollNumber].health = trolls[_trollNumber].health.add(_amount);
         troll_owner[_key][_trollNumber].health = troll_owner[_key][_trollNumber].health.add(_amount);
         return trolls[_trollNumber].health;
     }
     
-    function IncreaseLifes(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+    function IncreaseLifes(address _key, uint256 _trollNumber, uint8 _amount) public OnlyTrollOwner(_trollNumber) returns (uint256) {
         trolls[_trollNumber].lifes = trolls[_trollNumber].lifes.add(_amount);
         troll_owner[_key][_trollNumber].lifes = troll_owner[_key][_trollNumber].lifes.add(_amount);
         return trolls[_trollNumber].lifes;
     }
     
-    function IncreaseStrength(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+    function IncreaseStrength(address _key, uint256 _trollNumber, uint8 _amount) public OnlyTrollOwner(_trollNumber) returns (uint256) {
         trolls[_trollNumber].strength = trolls[_trollNumber].strength.add(_amount);
         troll_owner[_key][_trollNumber].strength = troll_owner[_key][_trollNumber].strength.add(_amount);
         return trolls[_trollNumber].strength;
     }
     
-    function IncreasePower(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+    function IncreasePower(address _key, uint256 _trollNumber, uint8 _amount) public OnlyTrollOwner(_trollNumber) returns (uint256) {
         trolls[_trollNumber].power = trolls[_trollNumber].power.add(_amount);
         troll_owner[_key][_trollNumber].power = troll_owner[_key][_trollNumber].power.add(_amount);
         return trolls[_trollNumber].power;
     }
     
-    function IncreaseSpeed(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+    function IncreaseSpeed(address _key, uint256 _trollNumber, uint8 _amount) public OnlyTrollOwner(_trollNumber) returns (uint256) {
         trolls[_trollNumber].speed = trolls[_trollNumber].speed.add(_amount);
         troll_owner[_key][_trollNumber].speed = troll_owner[_key][_trollNumber].speed.add(_amount);
         return trolls[_trollNumber].speed;
     }
     
-    function IncreaseAgility(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+    function IncreaseAgility(address _key, uint256 _trollNumber, uint8 _amount) public OnlyTrollOwner(_trollNumber) returns (uint256) {
         trolls[_trollNumber].agility = trolls[_trollNumber].agility.add(_amount);
         troll_owner[_key][_trollNumber].agility = troll_owner[_key][_trollNumber].agility.add(_amount);
         return trolls[_trollNumber].agility;
@@ -57,37 +57,37 @@ contract TrollStatFactory is PlayerFactory {
      }
     
     // "Decrease Stat Functions". //////////////////////////////////////////////////////////////////////////////
-    function DecreaseHealth(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+    function DecreaseHealth(address _key, uint256 _trollNumber, uint8 _amount) external returns (uint256) {
         trolls[_trollNumber].health = trolls[_trollNumber].health.sub(_amount);
         troll_owner[_key][_trollNumber].health = troll_owner[_key][_trollNumber].health.sub(_amount);
         return trolls[_trollNumber].health;
     }
     
-    function DecreaseLifes(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+    function DecreaseLifes(address _key, uint256 _trollNumber, uint8 _amount) external returns (uint256) {
         trolls[_trollNumber].lifes = trolls[_trollNumber].lifes.sub(_amount);
         troll_owner[_key][_trollNumber].lifes = troll_owner[_key][_trollNumber].lifes.sub(_amount);
         return trolls[_trollNumber].lifes;
     }
     
-    function DecreaseStrength(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+    function DecreaseStrength(address _key, uint256 _trollNumber, uint8 _amount) external returns (uint256) {
         trolls[_trollNumber].strength = trolls[_trollNumber].strength.sub(_amount);
         troll_owner[_key][_trollNumber].strength = troll_owner[_key][_trollNumber].strength.sub(_amount);
         return trolls[_trollNumber].strength;
     }
     
-    function DecreasePower(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+    function DecreasePower(address _key, uint256 _trollNumber, uint8 _amount) external returns (uint256) {
         trolls[_trollNumber].power = trolls[_trollNumber].power.sub(_amount);
         troll_owner[_key][_trollNumber].power = troll_owner[_key][_trollNumber].power.sub(_amount);
         return trolls[_trollNumber].power;
     }
     
-    function DecreaseSpeed(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+    function DecreaseSpeed(address _key, uint256 _trollNumber, uint8 _amount) external returns (uint256) {
         trolls[_trollNumber].speed = trolls[_trollNumber].speed.sub(_amount);
         troll_owner[_key][_trollNumber].speed = troll_owner[_key][_trollNumber].speed.sub(_amount);
         return trolls[_trollNumber].speed;
     }
     
-    function DecreaseAgility(address _key, uint256 _trollNumber, uint8 _amount) public returns (uint256) {
+    function DecreaseAgility(address _key, uint256 _trollNumber, uint8 _amount) external returns (uint256) {
         trolls[_trollNumber].agility = trolls[_trollNumber].agility.sub(_amount);
         troll_owner[_key][_trollNumber].agility = troll_owner[_key][_trollNumber].agility.sub(_amount);
         return trolls[_trollNumber].agility;
