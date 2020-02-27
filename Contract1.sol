@@ -39,6 +39,10 @@ contract TrollFactory {
         _;
     }
     
+    function OnlyTrollOwner (uint _trollNumber) external view {
+        require (msg.sender == trolls[_trollNumber].owner);
+    }
+    
     constructor () public {
         total_trolls = 0;
         troll_types = 5;
