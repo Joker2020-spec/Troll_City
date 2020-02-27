@@ -114,7 +114,7 @@ contract PlayerInteraction {
     
     // Change - Set new score for both players and decrease the balance.
     function ShootNSwing(uint tid, uint gn) public {
-        TrollOwner(tid);
+        TrollOwner(tid);  <<<<<< REMOVE NOT WORKING!
         TS.DecreaseAgility(msg.sender, tid, 1);
         TS.DecreaseStrength(msg.sender, tid, 1);
         TS.DecreasePower(msg.sender, tid, 1);
