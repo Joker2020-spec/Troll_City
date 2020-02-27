@@ -27,6 +27,7 @@ contract PlayerInteraction {
     
     enum SportsGames {FOOTBALL, BASKETBALL, BASEBALL, GOLF} SportsGames SG;
     enum GameChoice {SINGLES, TEAMS} GameChoice GC;
+    enum Wager {TENCENTS, TWENTYCENTS, DOLLAR, TWODOLLAR, FIVEDOLLAR} Wager GW;
 
     
     struct SinglesGame {
@@ -38,6 +39,7 @@ contract PlayerInteraction {
         address player2;
         SportsGames sg;
         GameChoice gc;
+        Wager gw;
         bool begun;
         bool finished;
     }
@@ -68,8 +70,8 @@ contract PlayerInteraction {
     
     
   
-    function OpenSinglesGame(SportsGames _SG, GameChoice _GC, address p1, address p2) public {
-        uint newGame = game_on.push(SinglesGame(game_on.length, 0, 0, now, p1, p2, _SG, _GC, true, false));
+    function OpenSinglesGame(SportsGames _SG, GameChoice _GC, Wager _GW, address p1, address p2) public {
+        uint newGame = game_on.push(SinglesGame(game_on.length, 0, 0, now, p1, p2, _SG, _GC, _GW, true, false));
         games_open = games_open.add(newGame);
         emit NewSinglesGame(newGame, p1, p2);
     }
