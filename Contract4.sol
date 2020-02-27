@@ -20,9 +20,8 @@ contract PlayerInteraction {
        TF = TrollFactory(_key);
     }
     
-    modifier OnlyTrollOwner(uint tid) {
+    function TrollOwner(uint tid) private view {
         TS.OnlyTrollOwner(tid);
-        _;
     }
     
     using SafeMath for uint256;
@@ -114,7 +113,8 @@ contract PlayerInteraction {
     }
     
     // Change - Set new score for both players and decrease the balance.
-    function ShootNSwing(uint tid, uint gn) public OnlyTrollOwner(tid) {
+    function ShootNSwing(uint tid, uint gn) public {
+        TrollOwner(tid);
         TS.DecreaseAgility(msg.sender, tid, 1);
         TS.DecreaseStrength(msg.sender, tid, 1);
         TS.DecreasePower(msg.sender, tid, 1);
