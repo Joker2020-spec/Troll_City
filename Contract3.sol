@@ -9,7 +9,7 @@ contract TrollStatFactory is PlayerFactory {
     
     
     // "Increase Stat Functions". /////////////////////////////////////////////////////////////////////////
-    function IncreaseHealth(address _key, uint256 _trollNumber, uint8 _amount) public OnlyTrollOwner(_trollNumber) returns (uint256) {
+    function IncreaseHealth(address _key, uint256 _trollNumber, uint256 _amount) public OnlyTrollOwner(_trollNumber) returns (uint256) {
         trolls[_trollNumber].health = trolls[_trollNumber].health.add(_amount);
         troll_owner[_key][_trollNumber].health = troll_owner[_key][_trollNumber].health.add(_amount);
         return trolls[_trollNumber].health;
@@ -81,7 +81,7 @@ contract TrollStatFactory is PlayerFactory {
         return trolls[_trollNumber].power;
     }
     
-    function DecreaseSpeed(address _key, uint256 _trollNumber, uint8 _amount) external returns (uint256) {
+    function DecreaseSpeed(address _key, uint256 _trollNumber, uint256 _amount) external returns (uint256) {
         trolls[_trollNumber].speed = trolls[_trollNumber].speed.sub(_amount);
         troll_owner[_key][_trollNumber].speed = troll_owner[_key][_trollNumber].speed.sub(_amount);
         return trolls[_trollNumber].speed;
@@ -102,27 +102,6 @@ contract TrollStatFactory is PlayerFactory {
                 troll_owner[_key][_trollNumber].lifes = troll_owner[_key][_trollNumber].lifes.sub(1);
             }
         }
-    }
-
-
-    // "Update And De-Re Activate Trolls". //////////////////////////////////////////////////////////////////////
-    function UpdateTrollType(address _key, uint256 _trollNumber) public returns (bool success) {
-        require (trolls[_trollNumber].troll_level >= max_troll_level);
-        if (trolls[_trollNumber].troll_level >= max_troll_level) {
-            trolls[_trollNumber].type_of = trolls[_trollNumber].type_of.add(1);
-            troll_owner[_key][_trollNumber].type_of = troll_owner[_key][_trollNumber].type_of.add(1);
-        }
-        return true;
-    }
-    
-    function DeadTroll(address _key, uint256 _trollNumber) public {
-        trolls[_trollNumber].playable = false;
-        troll_owner[_key][_trollNumber].playable = false;
-    }
-    
-    function ReviveTroll(address _key, uint256 _trollNumber) public {
-        trolls[_trollNumber].playable = true;
-        troll_owner[_key][_trollNumber].playable = true;
     }
     
 }
