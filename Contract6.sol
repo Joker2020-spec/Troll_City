@@ -36,7 +36,7 @@ contract StatMarketPlace {
     
     function BuyHealth(uint price, uint _troll) public {
         uint256 hp = price.div(10).mul(20);
-        // daitoken.transfer(this, price);
+        daitoken.transfer(wallet, price);
         TS.IncreaseHealth(msg.sender, _troll, hp);
     }
     
