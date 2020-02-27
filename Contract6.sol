@@ -21,7 +21,7 @@ contract StatMarketPlace {
     uint public total_sells; 
     
     function SetDaiTokenAddress(address key) public {
-        require (msg.sender == owner);
+        // require (msg.sender == owner);
         daitoken = DaiToken(key);
     }
     
@@ -51,13 +51,13 @@ contract DaiFaucet is StatMarketPlace  {
 	
 
 	// Give out Dai to anyone who asks
-	function withdraw(uint withdraw_amount) public {
+	function withdraw(uint withdraw_amount) public payable {
 		// Limit withdrawal amount
-		require(withdraw_amount <= 0.1 ether);
-		require(daitoken.balanceOf(address(this)) >= withdraw_amount,
+		require(msg.value <= 0.1 ether);
+		require(daitoken.balanceOf(address(this)) >= msg.value,
 			"Insufficient balance in faucet for withdrawal request");
 		// Send the amount to the address that requested it
-		daitoken.transfer(msg.sender, withdraw_amount);
+		daitoken.transfer(msg.sender, msg.value);
 		emit Withdrawal(msg.sender, withdraw_amount);
 	}
 	
@@ -66,5 +66,3 @@ contract DaiFaucet is StatMarketPlace  {
 		emit Deposit(msg.sender, msg.value);
 	}
 }
-    
-    
