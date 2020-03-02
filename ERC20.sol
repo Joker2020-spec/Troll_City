@@ -126,8 +126,10 @@ contract ERC20 is IERC20 {
     }
     
     function TransferFrom(address _from, address _too, uint _amount) public override {
-        require (allowances[_from][msg.sender] >= _amount);
-        require (_balances[_from] >= _amount);
+        require (allowances[_from][msg.sender] >= _amount, "The account withdrawing the tokens is allowed to take the amount of tokens.");
+        require (_balances[_from] >= _amount, "The account having tokens deducted has a balance large enough to execute the transaction.");
+        require (_from != address(0), "The account having tokens deducted is not the 0x0000000000000000000000000000000000000000 address");
+        require (_too != address(0), "The account being sent tokens is not the 0x0000000000000000000000000000000000000000 address");
         allowances[_from][msg.sender] = allowances[_from][msg.sender].sub(_amount);
         _balances[_from] = _balances[_from].sub(_amount);
         _balances[_too] = _balances[_too].add(_amount);
