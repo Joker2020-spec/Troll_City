@@ -36,4 +36,5 @@ contract Marketplace {
        items.push(item(items.length, _price, _time_slot, msg.sender, false));
        emit NewItemForSale(items.length, _price, _time_slot);
    }
+   
 }
