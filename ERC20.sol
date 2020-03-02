@@ -85,6 +85,11 @@ contract ERC20 is IERC20 {
     event transfer(address _too, uint amount);
     event approval(address _from, address _spender, uint _amount);
     
+    modifier OnlyOwner() {
+        require (msg.sender == _contractOwner);
+        _;
+    }
+    
     constructor () public {
         _contractOwner = msg.sender;
         _decimals = 18;
@@ -135,5 +140,25 @@ contract ERC20 is IERC20 {
         _balances[_too] = _balances[_too].add(_amount);
         emit transfer(_too, _amount);
     }
+    
+    function _Mint(address _too, uint _amount) public returns (bool) {
+        require (_amount > 0, "Amount being minted is greater than 0.");
+        require (_too != address(0), "The account being sent tokens is not the 0x0000000000000000000000000000000000000000 address");
+        _beforeTokenTransfer(address(0), _too, _amount);
+        _totalSupply = _totalSupply.add(_amount);
+        _balances[_too] = _balances[_too].add(_amount);
+        emit transfer(_too, _amount);
+        return true;
+    }
+    
+    function _Burn(address _from, uint _amount) public {
+        require (_amount > 0, "Amount being minted is greater than 0.");
+        require (_from != address(0), "The account being sent tokens is not the 0x0000000000000000000000000000000000000000 address");
+        _beforeTokenTransfer(address(0), _from, _amount);
+        _totalSupply = _totalSupply.sub(_amount);
+        _balances[_from] = _balances[_from].sub(_amount);
+    }
+    
+    function _beforeTokenTransfer(address _from, address _too, uint256 _amount) internal virtual { }
     
 }
