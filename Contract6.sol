@@ -1,68 +1,23 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
-import"./Contract3.sol";
-import"./SafeMath.sol";
+import"./ERC20.sol";
 
-interface DaiToken {
-    function transfer(address dst, uint wad) external returns (bool);
-    function balanceOf(address guy) external view returns (uint);
-}
-
-contract StatMarketPlace {
+contract Marketplace {
     
-    using SafeMath for uint256;
+    ERC20 erc20;
     
-    DaiToken daitoken;
-    TrollStatFactory TS;
-    
-    address public owner;
-    address public wallet;
-    uint public total_buys;
-    uint public total_sells; 
-    
-    function SetDaiTokenAddress(address key) public {
-        // require (msg.sender == owner);
-        daitoken = DaiToken(key);
+    function SetTokenAddress(address _contract) public {
+        erc20 = ERC20(_contract);
     }
     
-    function SetTrollStatFactoryAddress(address key) public {
-        require (msg.sender == owner);
-        TS = TrollStatFactory(key);
-    }
+    uint public _totalSales;
+    address public _owner;
     
-    function SetWalletAddress(address key) public {
-        wallet = key;
-    }
+    event SaleFinalised(address _buyer, address _seller, uint _item, uint _price);
     
-    function BuyHealth(uint price, uint _troll) public {
-        require (price >= 1);
-        uint256 hp = price.div(10).mul(20);
-        daitoken.transfer(wallet, price);
-        TS.IncreaseHealth(msg.sender, _troll, hp);
-    }
-}
-
-contract DaiFaucet is StatMarketPlace  {
-    
-    DaiToken daitoken;
-    
-	event Withdrawal(address indexed to, uint amount);
-	event Deposit(address indexed from, uint amount);
-	
-
-	// Give out Dai to anyone who asks
-	function withdraw(uint withdraw_amount) public payable {
-		// Limit withdrawal amount
-		require(msg.value <= 0.1 ether);
-		require(daitoken.balanceOf(address(this)) >= msg.value,
-			"Insufficient balance in faucet for withdrawal request");
-		// Send the amount to the address that requested it
-		daitoken.transfer(msg.sender, msg.value);
-		emit Withdrawal(msg.sender, withdraw_amount);
-	}
-	
-	// Accept any incoming amount
-	function () external payable {
-		emit Deposit(msg.sender, msg.value);
-	}
+   function Buy(address _seller, uint _item, uint _price) public {
+       erc20.Transfer(_seller, _price);
+       _totalSales++;
+       emit SaleFinalised(msg.sender, _seller, _item, _price);
+   }
 }
