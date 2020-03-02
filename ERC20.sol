@@ -115,6 +115,7 @@ contract ERC20 is IERC20 {
     function _Transfer(address _too, uint _amount) private {
         require (_balances[msg.sender] >= _amount, "The sender has enough tokens to execute the transaction.");
         require (_too != address(0), "The receiver is not the 0x0000000000000000000000000000000000000000 address.");
+        _beforeTokenTransfer(msg.sender, _too, _amount);
         _balances[msg.sender] = _balances[msg.sender].sub(_amount);
         _balances[_too] = _balances[_too].add(_amount);
         emit transfer(_too, _amount);
@@ -132,6 +133,7 @@ contract ERC20 is IERC20 {
     }
     
     function DecreaseAllowance(address _spender, uint _amount) public override {
+        require (allowances[msg.sender][_spender] >= allowances[msg.sender][_spender], "The balance allowed for the spender matches the amount provided.");
         allowances[msg.sender][_spender] = allowances[msg.sender][_spender].sub(_amount);
     }
     
