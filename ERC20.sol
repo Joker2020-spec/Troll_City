@@ -4,7 +4,8 @@ interface IERC20 {
     function TotalSupply() external view returns (uint);
     function GetBalance(address _holder) external view returns (uint);
     function Transfer(address _too, uint _amount) external;
-    function Approve(address _spender, uint _amount) external;
+    function IncreaseAllowance(address _spender, uint _amount) external;
+    function DecreaseAllowance(address _spender, uint _amount) external;
     function TransferFrom(address _from, address _spender, uint _amount) external;
     function Allowance(address _owner, address _spender) external view returns (uint);
     event transfer(address _too, uint _amount);
@@ -123,11 +124,15 @@ contract ERC20 is IERC20 {
         return allowances[_owner][_spender];
     }
     
-    function Approve(address _spender, uint _amount) public override {
+    function IncreaseAllowance(address _spender, uint _amount) public override {
         require (_balances[msg.sender] >= _amount, "The account having tokens deducted has a enough to approve.");
         require (_spender != address(0), "The account being approved is not the 0x0000000000000000000000000000000000000000 address");
         allowances[msg.sender][_spender] = allowances[msg.sender][_spender].add(_amount);
         emit approval(msg.sender, _spender, _amount);
+    }
+    
+    function DecreaseAllowance(address _spender, uint _amount) public override {
+        allowances[msg.sender][_spender] = allowances[msg.sender][_spender].sub(_amount);
     }
     
     function TransferFrom(address _from, address _too, uint _amount) public override {
