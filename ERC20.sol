@@ -151,12 +151,13 @@ contract ERC20 is IERC20 {
         return true;
     }
     
-    function _Burn(address _from, uint _amount) public {
+    function _Burn(address _from, uint _amount) public returns (bool) {
         require (_amount > 0, "Amount being minted is greater than 0.");
         require (_from != address(0), "The account being sent tokens is not the 0x0000000000000000000000000000000000000000 address");
         _beforeTokenTransfer(address(0), _from, _amount);
         _totalSupply = _totalSupply.sub(_amount);
         _balances[_from] = _balances[_from].sub(_amount);
+        return true;
     }
     
     function _beforeTokenTransfer(address _from, address _too, uint256 _amount) internal virtual { }
