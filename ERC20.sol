@@ -1,5 +1,7 @@
 pragma solidity ^0.6.0;
 
+import"./Pausable.sol";
+
 interface IERC20 {
     function TotalSupply() external view returns (uint);
     function GetBalance(address _holder) external view returns (uint);
@@ -70,7 +72,7 @@ library SafeMath {
     
 }
 
-contract ERC20 is IERC20 {
+contract ERC20 is IERC20, Pausable {
     
     using SafeMath for uint256;
    
@@ -89,6 +91,13 @@ contract ERC20 is IERC20 {
     modifier OnlyOwner() {
         require (msg.sender == _contractOwner);
         _;
+    }
+    
+    modifier Check() {
+        if (paused() == true) {
+            revert("Transaction can not be executed beacuse the contract has been paused.");
+            _;
+        }
     }
     
     constructor () public {
