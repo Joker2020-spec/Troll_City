@@ -72,10 +72,10 @@ library SafeMath {
 contract ERC20 is IERC20 {
     
     using SafeMath for uint256;
-    
-    uint public _totalSupply;
-    uint public _decimals;
+   
     address public _contractOwner;
+    uint public _decimals;
+    uint public _totalSupply;
     string public _name;
     string public _ticker;
     
@@ -86,7 +86,12 @@ contract ERC20 is IERC20 {
     event approval(address _from, address _spender, uint _amount);
     
     constructor () public {
-        
+        _contractOwner = msg.sender;
+        _decimals = 18;
+        _totalSupply = 100 * (10 ** _decimals);
+        _name = "ConWiseToken";
+        _ticker = "CWT";
+        _balances[_contractOwner] = _balances[_contractOwner].add(_totalSupply);
     }
     
     function TotalSupply() public override view returns (uint) {
@@ -98,7 +103,15 @@ contract ERC20 is IERC20 {
     }
     
     function Transfer(address _too, uint _amount) public override {
-        
+        _Transfer(_too, _amount);
+    }
+    
+    function _Transfer(address _too, uint _amount) private {
+        require (_balances[msg.sender] >= _amount, "The sender has enough tokens to execute the transaction.");
+        require (_too != address(0), "The receiver is not the 0x0000000000000000000000000000000000000000 address.");
+        _balances[msg.sender] = _balances[msg.sender].sub(_amount);
+        _balances[_too] = _balances[_too].add(_amount);
+        emit transfer(_too, _amount);
     }
     
     function Allowance(address _owner, address _spender) public override view returns (uint) {
@@ -106,11 +119,19 @@ contract ERC20 is IERC20 {
     }
     
     function Approve(address _spender, uint _amount) public override {
-        
+        require (_balances[msg.sender] >= _amount, "The account having tokens deducted has a enough to approve.");
+        require (_spender != address(0), "The account being approved is not the 0x0000000000000000000000000000000000000000 address");
+        allowances[msg.sender][_spender] = allowances[msg.sender][_spender].add(_amount);
+        emit approval(msg.sender, _spender, _amount);
     }
     
     function TransferFrom(address _from, address _too, uint _amount) public override {
-        
+        require (allowances[_from][msg.sender] >= _amount);
+        require (_balances[_from] >= _amount);
+        allowances[_from][msg.sender] = allowances[_from][msg.sender].sub(_amount);
+        _balances[_from] = _balances[_from].sub(_amount);
+        _balances[_too] = _balances[_too].add(_amount);
+        emit transfer(_too, _amount);
     }
     
 }
