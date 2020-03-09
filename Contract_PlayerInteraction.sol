@@ -44,7 +44,16 @@ contract PlayerInteraction {
         bool finished;
     }
     
+    // Add Multiplayer Game type for sports choice...
+    // ----------------------------------------------
+    //-----------------------------------------------
+    
+    
+    
+    
     SinglesGame[] public game_on;
+    // Add storage for multiplayer games.
+    //-----------------------------------
     
     
     event NewSinglesGame(uint gameOpened, address player1, address player2);
