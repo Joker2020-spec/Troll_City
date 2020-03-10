@@ -4,18 +4,17 @@ import"./ERC20.sol";
 
 contract Marketplace {
     
+    uint256 public _totalSales;
     uint256 public ONE_HOUR_AUCTION = 3600;
     uint256 public ONE_DAY_AUCTION = 86400;
     uint256 public ONE_WEEK_AUCTION = 604800;
+    address public _owner;
     
     ERC20 erc20;
     
     function SetTokenAddress(address _contract) public {
         erc20 = ERC20(_contract);
     }
-    
-    uint256 public _totalSales;
-    address public _owner;
     
     struct item {
         uint256 _item_id;
