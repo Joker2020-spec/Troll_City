@@ -3,21 +3,21 @@ pragma solidity ^0.6.0;
 contract Boosters {
     
     
-    uint public BOOSTER_P1 = 10;
-    uint public BOOSTER_P2 = 20;
-    uint public BOOSTER_P3 = 30;
-    uint public BOOSTER_P4 = 40;
-    uint public BOOSTER_P5 = 50;
-    uint public BOOSTER_P6 = 60;
-    uint public BOOSTER_P7 = 70;
-    uint public BOOSTER_P8 = 80;
-    uint public BOOSTER_P9 = 90;
-    uint public BOOSTER_P10 = 100;
-    uint public BOOSTER_P11 = 15;
-    uint public BOOSTER_P12 = 28;
-    uint public BOOSTER_P13 = 37;
-    uint public BOOSTER_P14 = 41;
-    uint public BOOSTER_P15 = 59;
+    uint BOOSTER_P1 = 10;
+    uint BOOSTER_P2 = 20;
+    uint BOOSTER_P3 = 30;
+    uint BOOSTER_P4 = 40;
+    uint BOOSTER_P5 = 50;
+    uint BOOSTER_P6 = 60;
+    uint BOOSTER_P7 = 70;
+    uint BOOSTER_P8 = 80;
+    uint BOOSTER_P9 = 90;
+    uint BOOSTER_P10 = 100;
+    uint BOOSTER_P11 = 15;
+    uint BOOSTER_P12 = 28;
+    uint BOOSTER_P13 = 37;
+    uint BOOSTER_P14 = 41;
+    uint BOOSTER_P15 = 59;
     
     uint public TOTAL_BOOSTERS = 0;
     
@@ -126,5 +126,8 @@ contract Boosters {
         boosters.push(booster_t[9]);
         TOTAL_BOOSTERS++;
     }
+    
+
+    
     
 }
