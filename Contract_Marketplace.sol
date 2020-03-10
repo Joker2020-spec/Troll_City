@@ -55,16 +55,14 @@ contract Marketplace {
        emit NewItemForSale(items.length, _price, _time_slot);
    }
     
-   function BuyItem(uint256 _item, uint256 _value) private CheckTime(_item) {
-       require (items[_item]._price == _value);
-       if (items[_item]._item_number == _item) {
-           items[_item]._sold = true;
-           items[_item]._buyer = msg.sender;
-           items[_item].auc_finished = true;
-       }
-       erc20.Transfer(items[_item]._owner, _value);
-       _totalSales++;
-       emit SaleFinalised(msg.sender, items[_item]._owner, _item, _value);
+   function BuyItem(uint256 _item, uint256 _price) public payable CheckTime(_item) {
+       require (items[_item]._price == _price);
+        items[_item]._sold = true;
+        items[_item]._buyer = msg.sender;
+        items[_item].auc_finished = true;
+        erc20.Transfer(items[_item]._buyer, items[_item]._owner, _price);
+        _totalSales++;
+       emit SaleFinalised(msg.sender, items[_item]._owner, _item, _price);
    }
    
    function Bid(uint256 _item, uint256 _bid) public CheckTime(_item) CheckBid(_item, _bid) {
