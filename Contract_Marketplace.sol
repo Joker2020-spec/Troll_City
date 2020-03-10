@@ -27,7 +27,7 @@ contract Marketplace {
     item[] public items;
     
     modifier CheckTime(uint _item) {
-        if (items[_item]._time_slot > now) {
+        if (items[_item]._time_slot < now) {
             revert ("The allocated time for this auction has ended.");
             _;
         }
