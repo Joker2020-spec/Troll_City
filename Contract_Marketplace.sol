@@ -15,26 +15,51 @@ contract Marketplace {
     
     struct item {
         uint _item_id;
+        uint _item_number;
         uint _price;
         uint _time_slot;
+        uint _bids;
+        uint _current_bid;
         address _owner;
         bool _sold;
     }
     
     item[] public items;
     
+    modifier CheckTime(uint _item) {
+        if (items[_item]._time_slot > now) {
+            revert ("The allocated time for this auction has ended.");
+            _;
+        }
+    }
+    
     event NewItemForSale(uint _item_id, uint _price, uint _time_slot);
     event SaleFinalised(address _buyer, address _seller, uint _item, uint _price);
+    event NewBid(address _bidder, uint _item, uint _bid);
     
-   function Buy(address _seller, uint _item, uint _price) public {
+    
+    
+    function SellItem(uint _itemId, uint _price, uint _time_slot) public {
+       items.push(item(_itemId, items.length, _price, now + _time_slot, 0, 0, msg.sender, false));
+       emit NewItemForSale(items.length, _price, _time_slot);
+   }
+    
+   function BuyItem(address _seller, uint _item, uint _price) public {
+       if (items[_item]._item_number == _item) {
+           items[_item]._sold = true;
+       }
        erc20.Transfer(_seller, _price);
        _totalSales++;
        emit SaleFinalised(msg.sender, _seller, _item, _price);
    }
    
-   function Sell(uint _price, uint _time_slot) public {
-       items.push(item(items.length, _price, _time_slot, msg.sender, false));
-       emit NewItemForSale(items.length, _price, _time_slot);
+   function Bid(uint _item, uint _bid) public CheckTime(_item) {
+       if (items[_item]._item_number == _item) {
+           items[_item]._bids = items[_item]._bids + 1;
+           items[_item]._current_bid = _bid;
+           emit NewBid(msg.sender, _item, _bid);
+       }
    }
+   
    
 }
