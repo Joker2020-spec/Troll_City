@@ -42,7 +42,7 @@ contract Marketplace {
        emit NewItemForSale(items.length, _price, _time_slot);
    }
     
-   function BuyItem(address _seller, uint _item, uint _price) public {
+   function BuyItem(address _seller, uint _item, uint _price) public CheckTime(_item) {
        if (items[_item]._item_number == _item) {
            items[_item]._sold = true;
        }
