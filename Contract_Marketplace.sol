@@ -27,10 +27,8 @@ contract Marketplace {
     item[] public items;
     
     modifier CheckTime(uint _item) {
-        if (items[_item]._time_slot < now) {
-            revert ("The allocated time for this auction has ended.");
-            _;
-        }
+        require (items[_item]._time_slot > now, "The time allocation against this 'item' has not ended yet.");
+        _;
     }
     
     event NewItemForSale(uint _item_id, uint _price, uint _time_slot);
