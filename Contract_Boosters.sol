@@ -2,100 +2,100 @@ pragma solidity ^0.6.0;
 
 contract Boosters {
     
-    uint BOOSTER_P1 = 10;
-    uint BOOSTER_P2 = 20;
-    uint BOOSTER_P3 = 30;
-    uint BOOSTER_P4 = 40;
-    uint BOOSTER_P5 = 50;
-    uint BOOSTER_P6 = 60;
-    uint BOOSTER_P7 = 70;
-    uint BOOSTER_P8 = 80;
-    uint BOOSTER_P9 = 90;
-    uint BOOSTER_P10 = 100;
-    uint BOOSTER_P11 = 15;
-    uint BOOSTER_P12 = 28;
-    uint BOOSTER_P13 = 37;
-    uint BOOSTER_P14 = 41;
-    uint BOOSTER_P15 = 59;
+    uint256 BOOSTER_P1 = 10;
+    uint256 BOOSTER_P2 = 20;
+    uint256 BOOSTER_P3 = 30;
+    uint256 BOOSTER_P4 = 40;
+    uint256 BOOSTER_P5 = 50;
+    uint256 BOOSTER_P6 = 60;
+    uint256 BOOSTER_P7 = 70;
+    uint256 BOOSTER_P8 = 80;
+    uint256 BOOSTER_P9 = 90;
+    uint256 BOOSTER_P10 = 100;
+    uint256 BOOSTER_P11 = 15;
+    uint256 BOOSTER_P12 = 28;
+    uint256 BOOSTER_P13 = 37;
+    uint256 BOOSTER_P14 = 41;
+    uint256 BOOSTER_P15 = 59;
     
-    uint public TOTAL_BOOSTERS = 0;
+    uint256 public TOTAL_BOOSTERS = 0;
     
     struct booster1 {
-        uint BOOSTER_P1;
+        uint256 BOOSTER_P1;
     }
     
     struct bootser2 {
-        uint BOOSTER_P2;
+        uint256 BOOSTER_P2;
     }
     
     struct booster3 {
-        uint BOOSTER_P3;
+        uint256 BOOSTER_P3;
     }
     
     struct booster4 {
-        uint BOOSTER_P4;
+        uint256 BOOSTER_P4;
     }
     
     struct booster5 {
-        uint BOOSTER_P5;
+        uint256 BOOSTER_P5;
     }
     
     struct booster6 {
-        uint BOOSTER_P6;
+        uint256 BOOSTER_P6;
     }
     
     struct booster7 {
-        uint BOOSTER_P7;
+        uint256 BOOSTER_P7;
     }
     
     struct booster8 {
-        uint BOOSTER_P8;
+        uint256 BOOSTER_P8;
     }
     
     struct booster9 {
-        uint BOOSTER_P9;
+        uint256 BOOSTER_P9;
     }
     
     struct booster10 {
-        uint BOOSTER_P10;
+        uint256 BOOSTER_P10;
     }
     
     struct booster11 {
-        uint BOOSTER_P11;
-        uint BOOSTER_P1;
-        uint BOOSTER_P10;
+        uint256 BOOSTER_P11;
+        uint256 BOOSTER_P1;
+        uint256 BOOSTER_P10;
     }
     
     struct booster12 {
-        uint BOOSTER_P12;
-        uint BOOSTER_P2;
-        uint BOOSTER_P9;
-        uint BOOSTER_P5;
+        uint256 BOOSTER_P12;
+        uint256 BOOSTER_P2;
+        uint256 BOOSTER_P9;
+        uint256 BOOSTER_P5;
     }
     
     struct booster13 {
-        uint BOOSTER_P13;
-        uint BOOSTER_P3;
-        uint BOOSTER_P5;
-        uint BOOSTER_P4;
+        uint256 BOOSTER_P13;
+        uint256 BOOSTER_P3;
+        uint256 BOOSTER_P5;
+        uint256 BOOSTER_P4;
     }
     
     struct booster14 {
-        uint BOOSTER_P14;
-        uint BOOSTER_P4;
-        uint BOOSTER_P10;
+        uint256 BOOSTER_P14;
+        uint256 BOOSTER_P4;
+        uint256 BOOSTER_P10;
     }
     
     struct booster15 {
-        uint BOOSTER_P15;
-        uint BOOSTER_P10;
-        uint BOOSTER_P9;
-        uint BOOSTER_P8;
+        uint256 BOOSTER_P15;
+        uint256 BOOSTER_P10;
+        uint256 BOOSTER_P9;
+        uint256 BOOSTER_P8;
     }
 
     
-    uint[15] private booster_t;
-    uint[] public boosters;
+    uint256[15] private booster_t;
+    uint256[] public boosters;
     
     constructor () public {
         booster_t[1] = BOOSTER_P1;
@@ -115,7 +115,7 @@ contract Boosters {
         booster_t[0] = BOOSTER_P15;
     } 
     
-    function NewBooster(uint _bn) public {
+    function NewBooster(uint256 _bn) public {
         boosters.push(booster_t[_bn]);
         TOTAL_BOOSTERS++;
     }
