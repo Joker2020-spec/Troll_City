@@ -2,7 +2,6 @@ pragma solidity ^0.6.0;
 
 contract Boosters {
     
-    
     uint BOOSTER_P1 = 10;
     uint BOOSTER_P2 = 20;
     uint BOOSTER_P3 = 30;
@@ -93,8 +92,9 @@ contract Boosters {
         uint BOOSTER_P9;
         uint BOOSTER_P8;
     }
+
     
-    uint[15] public booster_t;
+    uint[15] private booster_t;
     uint[] public boosters;
     
     constructor () public {
@@ -127,7 +127,36 @@ contract Boosters {
         TOTAL_BOOSTERS++;
     }
     
-
     
+    function BoosterPack2() public {
+        boosters.push(booster_t[2]);
+        boosters.push(booster_t[6]);
+        boosters.push(booster_t[7]);
+        boosters.push(booster_t[10]);
+    }
+    
+    function BoosterPack3() public {
+        boosters.push(booster_t[3]);
+        boosters.push(booster_t[4]);
+        boosters.push(booster_t[8]);
+        boosters.push(booster_t[13]);
+        boosters.push(booster_t[2]);
+    }
+    
+    function BoosterPack4() public {
+        boosters.push(booster_t[5]);
+        boosters.push(booster_t[10]);
+        boosters.push(booster_t[2]);
+        boosters.push(booster_t[3]);
+        boosters.push(booster_t[6]);
+    }
+    
+    function BoosterPack5() public {
+        boosters.push(booster_t[14]);
+        boosters.push(booster_t[2]);
+        boosters.push(booster_t[0]);
+        boosters.push(booster_t[8]);
+        boosters.push(booster_t[6]);
+    }
     
 }
