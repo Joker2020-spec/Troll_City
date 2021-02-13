@@ -1,4 +1,5 @@
-pragma solidity ^0.5.1;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.7.4;
 
 import"./SafeMath.sol";
 
@@ -45,7 +46,7 @@ contract TrollFactory {
     }
 
     
-    constructor () public {
+    constructor () {
         total_trolls = 0;
         troll_types = 5;
         contract_owner = msg.sender;
@@ -54,35 +55,35 @@ contract TrollFactory {
     
     function Newtroll_T1(string memory _name) internal {
         total_trolls++;
-        trolls.push(Troll(_name, 1, 1, 100, 10, 0, 0, 0, 0, 0, total_trolls, msg.sender, true));
+        trolls.push(Troll(_name, 1, 10, 100, 10, 0, 0, 0, 0, 0, total_trolls, msg.sender, true));
         troll_owner[msg.sender][total_trolls] = Troll(_name, 1, 1, 100, 10, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         // trolls.push(newTroll);
     }
     
     function Newtroll_T2(string memory _name) internal {
         total_trolls++;
-        Troll memory newTroll = Troll(_name, 1, 2, 100, 20, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 2, 20, 100, 20, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
     function Newtroll_T3(string memory _name) internal {
         total_trolls++;
-        Troll memory newTroll = Troll(_name, 1, 3, 100, 30, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 3, 15, 100, 30, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
     function Newtroll_T4(string memory _name) internal {
         total_trolls++;
-        Troll memory newTroll = Troll(_name, 1, 4, 100, 40, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 4, 10, 100, 40, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
     
     function Newtroll_T5(string memory _name) internal {
         total_trolls++;
-        Troll memory newTroll = Troll(_name, 1, 5, 100, 5, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
+        Troll memory newTroll = Troll(_name, 5, 5, 100, 5, 0, 0, 0, 0, 0, total_trolls, msg.sender, true);
         troll_owner[msg.sender][total_trolls] = newTroll;
         trolls.push(newTroll);
     }
